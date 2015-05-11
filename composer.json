@@ -37,13 +37,16 @@
     }
   ],
   "require"     : {
-    "johnpbloch/wordpress"                                      : "4.1",
+    "johnpbloch/wordpress"                                      : "4.2.2",
     "pods-framework/pods"                                       : "2.x",
     "wpackagist-plugin/caldera-forms"                           : "*",
     "wpackagist-plugin/restricted-site-access"                  : "*",
     "wpackagist-plugin/log-viewer"                              : "*",
     "wpackagist-plugin/caldera-forms"                           : "*",
-    "wpackagist-theme/twentyfifteen"                            : "*"
+    "wpackagist-theme/twentyfifteen"                            : "*",
+    "calderawp/caldera-custom-login"                            : "*",
+    "calderawp/cf-users"                                        : "*",
+    "calderawp/caldera-easy-pods"                               : "*"
   },
   "require-dev" : {
     "wpackagist-plugin/log-deprecated-notices"              : "*",
