@@ -6,7 +6,10 @@
             "email": "Josh@JoshPress.net"
         }
     ],
-    "require": {},
+    "minimum-stability": "dev",
+    "require": {
+      "calderawp/metaplate-core" : "dev-master"
+    },
     "autoload": {
     "psr-4": {
       "foundri\\fondri_mvp_lib\\": "lib"
