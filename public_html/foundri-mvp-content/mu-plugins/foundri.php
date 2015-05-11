@@ -14,4 +14,6 @@
  */
 add_action( 'init', function() {
 	include_once( dirname( __FILE__ ) . '/lib/vendor/autoload.php' );
+	include_once( dirname( __FILE__ ) . '/lib/includes/functions.php' );
+	include_once( dirname( __FILE__ ) . '/lib/includes/shortcodes.php' );
 });
