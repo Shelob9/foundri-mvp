@@ -1,0 +1,12 @@
+{
+  "name": "foundri-mvp",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "GPL",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.11",
+    "grunt-shell": "^1.1.1"
+  }
+}
