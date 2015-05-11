@@ -1,0 +1,8 @@
+/* TEAM */
+	Developer: Foundri
+	Contact:   Josh@JoshPress.net
+	URI:       http://Foundri.co
+
+/* SITE */
+	Created:  2015-05-11
+	Template: https://github.com/10up/grunt-wp-theme
