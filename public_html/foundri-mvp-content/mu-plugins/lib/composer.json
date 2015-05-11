@@ -1,0 +1,15 @@
+{
+    "name": "foundri/foundri-mvp-lib",
+    "authors": [
+        {
+            "name": "Josh Pollock",
+            "email": "Josh@JoshPress.net"
+        }
+    ],
+    "require": {},
+    "autoload": {
+    "psr-4": {
+      "foundri\\fondri_mvp_lib\\": "lib"
+    }
+  }
+}
