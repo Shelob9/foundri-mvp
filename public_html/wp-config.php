@@ -7,7 +7,7 @@
  * Set up constants for the basic paths
  */
 define( 'WP_ROOT_DIR',  dirname( dirname( __FILE__ ) ) );
-define( 'WP_WEBROOT_DIR',  WP_ROOT_DIR . '/public' );
+define( 'WP_WEBROOT_DIR',  WP_ROOT_DIR . '/public_html' );
 
 /**
  * Define locations for configs
