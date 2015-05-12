@@ -13,7 +13,9 @@
 namespace foundri_mvp_lib\forms\load;
 
 
-class output {
+use foundri_mvp_lib\forms\form;
+
+class output extends form{
 
 	/**
 	 * Use to call any form, that is set in form_load class.
@@ -30,24 +32,6 @@ class output {
 	public static function __callStatic( $name, $args ) {
 		if ( self::form_allowed( $name ) ) {
 			return \Caldera_Forms::render_form( $name );
-		}
-	}
-
-	/**
-	 * Check if a form is allowed
-	 *
-	 * @since 0.0.1
-	 *
-	 * @access protected
-	 *
-	 * @param string $name Name of form
-	 *
-	 * @return bool
-	 */
-	protected static function form_allowed( $name ) {
-		$allowed = form_load::get_instance()->forms;
-		if ( in_array( $name, $allowed  ) ) {
-			return true;
 		}
 
 	}
