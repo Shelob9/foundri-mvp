@@ -17,12 +17,13 @@
 function foundri_view() {
 	$id = get_queried_object_id();
 	$template = false;
+
 	if ( FOUNDRI_COMMUNITY == get_post_type( $id ) ) {
 
 
 		if ( ! is_null( $ask = pods_v_sanitized( 'ask' ) ) && 0 < absint( $ask ) ) {
 			$template = 'ask-single.html';
-			$item = new \foundri\lib\data\ask( $ask, true );
+			$item = new \foundri\lib\data\asks( $id, true );
 		}else{
 			$template = 'community-single.html';
 			$item = new \foundri\lib\data\community( $id, true );

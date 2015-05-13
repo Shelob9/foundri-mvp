@@ -85,7 +85,14 @@ abstract class get_item {
 	 * @param int $id Item ID
 	 * @param bool $markup_fields Optional. Whether to add additional markup fields or not. Default is false, which does not add.
 	 */
-	public function __construct( $id, $markup_fields = false ) {
+	public function __construct( $id, $markup_fields = false, $params = false ) {
+		if ( $params && is_array( $params ) ) {
+			foreach( $params as $param => $value ) {
+				$this->$$param = $value;
+			}
+
+		}
+		$this->pre_set();
 		$this->set_id( $id );
 		$this->set_pods_object();
 		$this->set_display_data( $markup_fields );
@@ -122,8 +129,12 @@ abstract class get_item {
 			'cache_mode' => 'cache',
 		);
 
+		if ( method_exists( $this, 'where_clause' ) ) {
+			$params[ 'where' ] = $this->where_clause();
+		} elseif ( property_exists( $this, 'where_pattern') ) {
+			$params[ 'where' ] = sprintf( $this->where_pattern, $this->id );
 
-		if ( ! property_exists( $this, 'where_pattern') ) {
+		}else{
 			if ( 0 < $this->id ) {
 				if ( 'pod' == $this->pods->api->pod_data[ 'type' ] ) {
 					$params[ 'where' ] = sprintf( 't.id = "%d"', $this->id );
@@ -132,8 +143,13 @@ abstract class get_item {
 				}
 			}
 
-		}else{
-			$params[ 'where' ] = sprintf( $this->where, $this->id );
+		}
+
+		if ( property_exists( $this, 'search_param' ) ) {
+			global $wpdb;
+			$search = $wpdb->esc_like( $this->search_param );
+			$params[ 'search' ] = esc_sql( '%' . $search . '%' );
+
 		}
 
 		$this->pods->find( $params );
@@ -207,6 +223,19 @@ abstract class get_item {
 	 */
 	protected function set_markup_fields() {
 		return array();
+	}
+
+	/**
+	 * Function that runs before any class variables are set.
+	 *
+	 * Exists for extending classes to have an opportunity to set additional properties.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 */
+	protected function pre_set() {
+		return;
 	}
 
 

@@ -33,8 +33,6 @@ add_action( 'init', function() {
 	 */
 	new \foundri\lib\forms\load\form_load();
 
-
-
 	add_filter( 'template_include', function() {
 		$template = dirname( __FILE__ ) . '/lib/views/the-views/foundri-template.php';
 		return $template;
@@ -52,4 +50,10 @@ add_action( 'init', function() {
 
 
 
+});
+
+
+add_action( 'rest_api_init', function() {
+	$api = new foundri\lib\api\endpoints();
+	$api->register_routes();
 });

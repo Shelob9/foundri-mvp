@@ -70,7 +70,7 @@ class community extends get_item {
 		$fields = array(
 			'forms' => array(
 				'make_ask' => \Caldera_Forms::render_form( 'ask_make' ),
-				'community_search' => \Caldera_Forms::render_form( 'community_search' ),
+				'ask_search' => \Caldera_Forms::render_form( 'ask_search' ),
 			),
 		);
 
