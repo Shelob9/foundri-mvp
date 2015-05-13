@@ -8,6 +8,8 @@
  * @link      
  * @copyright 2015 Josh Pollock
  */
+global $post;
+$id = $post->ID;
 $form = array (
 	'_last_updated' => 'Wed, 13 May 2015 06:40:14 +0000',
 	'ID' => 'ask_search',
@@ -28,6 +30,7 @@ $form = array (
 					'ask_type' => '1:1',
 					'text_search' => '1:2',
 					'search' => '2:1',
+					'community' => '1:1'
 				),
 			'structure' => '3:9|12',
 		),
@@ -98,6 +101,25 @@ $form = array (
 							'visibility' => 'all',
 							'type' => 'submit',
 							'class' => 'btn btn-default',
+						),
+					'conditions' =>
+						array (
+							'type' => '',
+						),
+				),
+			'community' =>
+				array (
+					'ID' => 'community',
+					'type' => 'hidden',
+					'label' => 'community',
+					'slug' => 'community',
+					'caption' => '',
+					'config' =>
+						array (
+							'custom_class' => '',
+							'visibility' => 'all',
+							'default' => $id,
+
 						),
 					'conditions' =>
 						array (

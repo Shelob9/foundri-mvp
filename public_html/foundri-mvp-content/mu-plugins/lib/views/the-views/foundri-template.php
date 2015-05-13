@@ -5,6 +5,8 @@
 		<meta name="viewport" content="width=device-width">
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src=//https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+
 		<!--[if lt IE 9]>
 		<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
 		<![endif]-->
@@ -29,14 +31,38 @@
 
 		</div><!-- #page .site -->
 
-	<?php wp_footer(); ?>
+	<?php
+		foundri_print_handelbars_js_templates();
+		wp_footer();
+	?>
 	<script>
 		var json_url = "<?php echo get_rest_url(); ?>";
 		function foundri_ask_search( obj ) {
-			console.log(  obj );
+			data = {
+				type: obj.data.type_search,
+				text: obj.data.text_search,
+				community: obj.data.community
+			};
 			type = obj.data.type_search;
 			text = obj.data.text_search;
+
 			text = encodeURIComponent( text );
+			$.get(
+				"<?php echo esc_url( foundri_api_url( 'asks' ) ); ?>",
+				data,
+				function( response ) {
+					asks_el = document.getElementById( 'asks' );
+					asks_el.innerHTML = '';
+					ask = JSON.parse( response );
+					$.each( asks, function ( i, ask ) {
+						source = $( 'foundri-ask-preview' ).html();
+						template = Handlebars.compile( source );
+						html = template( ask );
+						$( asks_el ).append( html );
+					}
+				},
+				'json'
+			);
 
 		}
 	</script>

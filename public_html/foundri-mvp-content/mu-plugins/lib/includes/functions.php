@@ -42,3 +42,27 @@ function foundri_view() {
 	}
 
 }
+
+
+function foundri_api_url( $endpoint = false ) {
+	$class = new foundri\lib\api\urls();
+	if ( ! $endpoint ) {
+		return $class->root_url();
+	}elseif( 'asks' == $endpoint ) {
+		return $class->ask_query();
+	}
+}
+
+/**
+ * Output templates as handlebars.js templates
+ */
+function foundri_print_handelbars_js_templates() {
+	foreach( array(
+		'foundri-ask-single' => 'ask-single',
+		'foundri-ask-preview' => 'ask-preview',
+		'foundri-community-single' => 'community-single'
+	) as $id => $template ) {
+		$template = FOUNDDRI_VIEW_DIR . $template;
+		printf( '<script id="%1s" type="text/x-handlebars-template">%2s</script>', $id, $template );
+	}
+}

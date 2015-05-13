@@ -14,12 +14,8 @@ namespace foundri\lib\api;
 
 use foundri\lib\data\ask_query;
 
-class endpoints {
+class endpoints extends vars {
 
-
-	protected $api_root = 'foundri';
-
-	protected $version = 'v1';
 
 	/**
 	 * Register routes for the API
