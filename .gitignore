@@ -11,3 +11,4 @@ _staging-config.php
 debug.log
 public_html/foundri-mvp-content/debug.log
 .idea/
+public_html/foundri-mvp-content/uploads
