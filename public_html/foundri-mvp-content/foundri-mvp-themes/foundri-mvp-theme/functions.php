@@ -12,8 +12,7 @@
  * @since 0.1.0
  */
  
- // Useful global constants
-define( 'FOUNDRI_MVP_VERSION', '0.1.0' );
+
  
  /**
   * Set up theme defaults and register supported WordPress features.
