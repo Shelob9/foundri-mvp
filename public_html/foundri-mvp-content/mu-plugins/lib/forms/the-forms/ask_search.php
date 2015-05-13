@@ -118,7 +118,7 @@ $form = array (
 						array (
 							'custom_class' => '',
 							'visibility' => 'all',
-							'default' => $id,
+							'default' => '{embed_post:ID}',
 
 						),
 					'conditions' =>
