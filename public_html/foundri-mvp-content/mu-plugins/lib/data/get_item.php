@@ -123,17 +123,22 @@ abstract class get_item {
 		);
 
 
-		if ( 0 < $this->id ) {
-			if ( 'pod' == $this->pods->api->pod_data[ 'type' ] ) {
-				$params['where'] = sprintf( 't.id = "%d"', $this->id );
-			}else{
-				$params['where'] = sprintf( 't.ID = "%d"', $this->id );
+		if ( ! property_exists( $this, 'where_pattern') ) {
+			if ( 0 < $this->id ) {
+				if ( 'pod' == $this->pods->api->pod_data[ 'type' ] ) {
+					$params[ 'where' ] = sprintf( 't.id = "%d"', $this->id );
+				} else {
+					$params[ 'where' ] = sprintf( 't.ID = "%d"', $this->id );
+				}
 			}
+
+		}else{
+			$params[ 'where' ] = sprintf( $this->where, $this->id );
 		}
 
 		$this->pods->find( $params );
 
-		if ( $this->id != $this->pods->id ) {
+		if (  0 < $this->id && $this->id != $this->pods->id ) {
 			$this->pods->fetch( $this->id );
 		}
 
@@ -203,5 +208,7 @@ abstract class get_item {
 	protected function set_markup_fields() {
 		return array();
 	}
+
+
 
 }
