@@ -9,19 +9,35 @@
  * @copyright 2015 Foundri
  */
 
+/**
+ * Output the Foundri UI
+ *
+ * @return null|string
+ */
 function foundri_view() {
 	$id = get_queried_object_id();
-	$view = false;
+	$template = false;
 	if ( FOUNDRI_COMMUNITY == get_post_type( $id ) ) {
-		$view = 'community-single.html';
-	}
 
-	if ( $view ) {
-		$view = FOUNDDRI_VIEW_DIR . $view;
 
-		$community = new \foundri\lib\data\community( $id, true );
+		if ( ! is_null( $ask = pods_v_sanitized( 'ask' ) ) && 0 < absint( $ask ) ) {
+			$template = 'ask-single.html';
+			$item = new \foundri\lib\data\ask( $ask, true );
+		}else{
+			$template = 'community-single.html';
+			$item = new \foundri\lib\data\community( $id, true );
 
-		return caldera_metaplate_from_file( $view, null,  $community->display_data );
+		}
+
+		$data = $item->display_data;
+
+
+		$template = FOUNDDRI_VIEW_DIR . $template;
+
+		$output =  caldera_metaplate_from_file( $template, null, $data );
+
+		return $output;
+
 	}
 
 }
