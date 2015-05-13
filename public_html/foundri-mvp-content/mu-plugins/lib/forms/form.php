@@ -9,7 +9,7 @@
  * @copyright 2015 Foundri
  */
 
-namespace foundri_mvp_lib\forms;
+namespace foundri\lib\forms;
 
 
 use foundri_mvp_lib\forms\load\form_load;

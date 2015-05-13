@@ -8,7 +8,7 @@
  * @link
  * @copyright 2015 Foundri
  */
-namespace foundri_mvp_lib\views;
+namespace foundri\lib\views;
 
 
 class view_loader {

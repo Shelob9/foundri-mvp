@@ -26,7 +26,8 @@ add_action( 'init', function() {
 	/**
 	 * Load classes
 	 */
-	new \foundri_mvp_lib\forms\load\form_load();
+	new \foundri\lib\forms\load\form_load();
+
 
 
 	/**

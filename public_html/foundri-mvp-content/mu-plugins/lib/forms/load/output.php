@@ -10,7 +10,7 @@
  */
 
 
-namespace foundri_mvp_lib\forms\load;
+namespace foundri\lib\forms\load;
 
 
 use foundri_mvp_lib\forms\form;

@@ -9,7 +9,7 @@
  * @copyright 2015 Foundri
  */
 
-namespace foundri_mvp_lib\queries;
+namespace foundri\lib\queries;
 
 
 class load_easy_pods {
