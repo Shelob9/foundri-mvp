@@ -1,0 +1,207 @@
+<?php
+/**
+ * Abstract class for classes used to get items from DB via Pods.
+ *
+ * @package   foundri
+ * @author    Josh Pollock <Josh@JoshPress.net>
+ * @license   GPL-2.0+
+ * @link
+ * @copyright 2015 Foundri
+ */
+namespace foundri\lib\data;
+
+
+abstract class get_item {
+
+	/**
+	 * The name of the Pod.
+	 *
+	 * NOTE: Must set in extending class.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 *
+	 * @var string
+	 */
+	protected $pod_name;
+
+	/**
+	 * Item ID
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var int
+	 */
+	public $id;
+
+	/**
+	 * Pods object
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var \Pods|object
+	 */
+	public $pods;
+
+	/**
+	 * The data to use on front end
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var array
+	 */
+	public $display_data;
+
+	/**
+	 * Data as JSON
+	 *
+	 * Is $this->display_data encoded as JSON
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var string
+	 */
+	public $json_data;
+
+	/**
+	 * Array of fields to use to construct output.
+	 *
+	 * IMPORTANT: Override in extending class, you must.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 *
+	 * @var array
+	 */
+	protected $display_fields = array();
+
+	/**
+	 * Class constructor.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param int $id Item ID
+	 * @param bool $markup_fields Optional. Whether to add additional markup fields or not. Default is false, which does not add.
+	 */
+	public function __construct( $id, $markup_fields = false ) {
+		$this->set_id( $id );
+		$this->set_pods_object();
+		$this->set_display_data( $markup_fields );
+		$this->set_json_data();
+
+	}
+
+	/**
+	 * Set id property
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access private
+	 *
+	 * @param int $id
+	 */
+	private function set_id( $id ) {
+		$this->id = (int) $id;
+	}
+
+	/**
+	 * Set pods property
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access private
+	 */
+	private function set_pods_object() {
+
+		$this->pods = pods( $this->pod_name );
+
+		$params = array(
+			'expires' => MINUTE_IN_SECONDS,
+			'cache_mode' => 'cache',
+		);
+
+
+		if ( 0 < $this->id ) {
+			if ( 'pod' == $this->pods->api->pod_data[ 'type' ] ) {
+				$params['where'] = sprintf( 't.id = "%d"', $this->id );
+			}else{
+				$params['where'] = sprintf( 't.ID = "%d"', $this->id );
+			}
+		}
+
+		$this->pods->find( $params );
+
+		if ( $this->id != $this->pods->id ) {
+			$this->pods->fetch( $this->id );
+		}
+
+	}
+
+	/**
+	 * Set display_data property
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 *
+	 * @param bool $markup_fields Optional. Whether to add additional markup fields or not. Default is false, which does not add.
+	 */
+	protected function set_display_data( $markup_fields ) {
+		$data = array(
+			'ID' => $this->pods->id()
+		);
+
+		foreach( $this->display_fields as $field => $sub_fields ) {
+			$_value = $this->pods->field( $field );
+			if ( ! empty( $sub_fields ) ) {
+				foreach( $sub_fields as $sub_field ) {
+					if ( isset( $_value[ 0 ] ) ) {
+						foreach( $_value as $i => $_v ) {
+							$data[ $field ][ $i ] = pods_v( $sub_field, $_v );
+						}
+					}else {
+						$data[ $field ] = pods_v( $sub_field, $_value );
+					}
+				}
+			}else{
+				$data[ $field ] = $_value;
+			}
+
+		}
+
+		if( $markup_fields ) {
+			$this->display_data = array_merge( $data, $this->set_markup_fields() );
+		}else{
+			$this->display_fields = $data;
+		}
+
+
+	}
+
+	/**
+	 * Set json_data property
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 */
+	protected function set_json_data() {
+		$this->json_data = wp_json_encode( $this->display_data );
+	}
+
+	/**
+	 * Set markup_fields property
+	 *
+	 * NOTE: Is an empty array, override in extending class to add additional fields need in template, like form HTML.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 */
+	protected function set_markup_fields() {
+		return array();
+	}
+
+}
