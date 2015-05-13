@@ -34,6 +34,10 @@
     {
       "type": "git",
       "url" : "https://bitbucket.org/calderadev/caldera-custom-login"
+    },
+    {
+      "type" : "git",
+      "url"  : "https://github.com/WP-API/WP-API"
     }
   ],
   "require"     : {
@@ -46,7 +50,8 @@
     "wpackagist-theme/twentyfifteen"                            : "*",
     "calderawp/caldera-custom-login"                            : "*",
     "calderawp/cf-users"                                        : "*",
-    "calderawp/caldera-easy-pods"                               : "*"
+    "calderawp/caldera-easy-pods"                               : "*",
+    "wp-api/wp-api"                                             : "*"
   },
   "require-dev" : {
     "wpackagist-plugin/log-deprecated-notices"              : "*",
