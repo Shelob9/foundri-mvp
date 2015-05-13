@@ -19,7 +19,9 @@ function foundri_view() {
 	if ( $view ) {
 		$view = FOUNDDRI_VIEW_DIR . $view;
 
-		return caldera_metaplate_from_file( $view, null, pods( FOUNDRI_COMMUNITY, $id )->export() );
+		$community = new \foundri\lib\data\community( $id, true );
+
+		return caldera_metaplate_from_file( $view, null,  $community->display_data );
 	}
 
 }
