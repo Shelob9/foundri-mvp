@@ -35,6 +35,14 @@ add_action( 'init', function() {
 
 
 
+	add_filter( 'template_include', function() {
+		$template = dirname( __FILE__ ) . '/lib/views/the-views/foundri-template.php';
+		return $template;
+	});
+
+
+
+
 	/**
 	 * Action after foundri boots
 	 *
