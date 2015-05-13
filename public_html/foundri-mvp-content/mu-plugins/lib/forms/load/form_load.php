@@ -30,6 +30,8 @@ class form_load {
 
 	/**
 	 * Constructor for class, used to make Caldera Forms aware of forms in file system.
+	 *
+	 * @since 0.0.1
 	 */
 	public function __construct() {
 		// add internal forms
@@ -39,17 +41,20 @@ class form_load {
 	/**
 	 * Add a form to Caldera Forms as needed
 	 *
+	 * @since 0.0.1
+	 *
 	 * @param array $form From data
 	 * @param string $name The name of the form.
 	 *
 	 * @return array
 	 */
 	public function include_forms( $form, $name ){
-		if ( in_array( $form, $this->forms ) ) {
+		if ( in_array( $name, $this->forms ) ) {
 			$location = dirname( dirname( __FILE__ ) ) . '/the-forms/' . $name . '.php';
-			if ( in_array( $name, $this->forms ) && file_exists( $location ) ) {
+			if ( file_exists( $location ) ) {
 				$form = include $location;
 			}
+
 		}
 
 		//use to export forms as php
@@ -57,20 +62,28 @@ class form_load {
 
 
 		return $form;
+
 	}
 
 
 	/**
 	 * Class instance
 	 *
-	 * @var \foundri_mvp_lib\forms\load\form_load|object
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 *
+	 * @var \foundri\lib\forms\load\form_load|object
 	 */
+
 	protected static $instance;
 
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @return \foundri_mvp_lib\forms\load\form_load|object
+	 * @since 0.0.1
+	 *
+	 * @return \foundri\lib\forms\load\form_load|object
 	 */
 	public static function get_instance() {
 
