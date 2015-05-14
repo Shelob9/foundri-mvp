@@ -26,5 +26,14 @@ class asks extends ask {
 	 */
 	protected $where_pattern = 'community.ID = "%d"';
 
-
+	/**
+	 * Set to be a collection of items.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 *
+	 * @var bool
+	 */
+	protected $single = false;
 }

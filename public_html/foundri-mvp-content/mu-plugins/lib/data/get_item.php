@@ -78,6 +78,17 @@ abstract class get_item {
 	protected $display_fields = array();
 
 	/**
+	 * Is context single item or collection of items?
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 *
+	 * @var bool
+	 */
+	protected $single = true;
+
+	/**
 	 * Class constructor.
 	 *
 	 * @since 0.0.1
@@ -93,7 +104,12 @@ abstract class get_item {
 		$this->pre_set();
 		$this->set_id( $id );
 		$this->set_pods_object();
-		$this->set_display_data( $markup_fields );
+		if ( $this->single ) {
+			$this->set_display_data( $markup_fields );
+		} else {
+			$this->set_display_data_with_loop();
+
+		}
 		$this->set_json_data();
 
 	}
@@ -152,7 +168,7 @@ abstract class get_item {
 
 		$this->pods->find( $params );
 
-		if (  0 < $this->id && $this->id != $this->pods->id ) {
+		if (  $this->single && 0 < $this->id && $this->id != $this->pods->id ) {
 			$this->pods->fetch( $this->id );
 		}
 
@@ -167,7 +183,7 @@ abstract class get_item {
 	 *
 	 * @param bool $markup_fields Optional. Whether to add additional markup fields or not. Default is false, which does not add.
 	 */
-	protected function set_display_data( $markup_fields ) {
+	protected function set_display_data( $markup_fields, $set_property = true ) {
 		$data = array(
 			'ID' => $this->pods->id()
 		);
@@ -190,12 +206,28 @@ abstract class get_item {
 
 		}
 
-		if( $markup_fields ) {
-			$this->display_data = array_merge( $data, $this->set_markup_fields() );
-		}else{
-			$this->display_fields = $data;
+		if ( $set_property ) {
+			if ( $markup_fields ) {
+				$this->display_data = array_merge( $data, $this->set_markup_fields() );
+			} else {
+				$this->display_data = $data;
+			}
+		}else {
+			return $data;
 		}
 
+
+	}
+
+	protected function set_display_data_with_loop() {
+		$data = array();
+		if ( 0 < $this->pods->total() ) {
+			while( $this->pods->fetch() ) {
+				$data[] = $this->set_display_data( false, false );
+			}
+
+		}
+		$this->display_data = $data;
 
 	}
 

@@ -56,11 +56,7 @@ $form = array (
 							'show_values' => 1,
 							'option' =>
 								array (
-									'one' =>
-										array (
-											'value' => 1,
-											'label' => 'one',
-										),
+
 								),
 						),
 					'conditions' =>
@@ -118,7 +114,7 @@ $form = array (
 						array (
 							'custom_class' => '',
 							'visibility' => 'all',
-							'default' => '{embed_post:ID}',
+							'default' => '{embedded_post:ID}',
 
 						),
 					'conditions' =>
@@ -169,5 +165,13 @@ $form = array (
 			'email_message' => '',
 		),
 );
+
+foreach( foundri_ask_types() as $value => $label ) {
+	$form[ 'fields' ][ 'ask_type' ][ 'config' ][ 'option' ][ $value ] = array(
+		'value' => $value,
+		'label' => $label
+	);
+}
+
 
 return $form;

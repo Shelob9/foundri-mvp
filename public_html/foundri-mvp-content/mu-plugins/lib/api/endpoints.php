@@ -37,6 +37,7 @@ class endpoints extends vars {
 						),
 						'search' => array(
 							'default' => 0,
+							'sanitize_callback' => 'urldecode'
 						)
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
@@ -57,24 +58,28 @@ class endpoints extends vars {
 	 */
 	public function get_items( $request ) {
 		$params = $request->get_params();
-		$text_search = pods_v_sanitized( 'search', $params );
+		$text_search = pods_v( 'search', $params );
 		if ( $text_search ) {
 			$text_search = urldecode( $text_search );
 		}
-		$type = pods_v_sanitized( 'ask_type', $params );
 
-		$id = absint( 'community', pods_v( 'community', $params ) );
-
-		$class_params = array(
-			'ask_type' => $type,
-			'search_param' => $text_search,
-		);
-
-		$query = new ask_query( $id, false, $class_params );
-		if ( 0 < $query->pods->total() ) {
-			$response = new \WP_REST_Response( $query->json_data, 200, array() );
-		}else{
+		$type = pods_v( 'ask_type', $params );
+		if ( ! in_array( $type, array_keys( foundri_ask_types() ) ) ) {
 			$response = new \WP_REST_Response( '', 404, array() );
+		}else{
+			$id = pods_v( 'community', $params );
+
+			$class_params = array(
+				'ask_type'     => $type,
+				'search_param' => $text_search,
+			);
+
+			$query = new ask_query( $id, false, $class_params );
+			if ( 0 < $query->pods->total() ) {
+				$response = new \WP_REST_Response( $query->display_data, 200, array() );
+			} else {
+				$response = new \WP_REST_Response( '', 404, array() );
+			}
 		}
 
 		$response->set_matched_route(  $request->get_route() );

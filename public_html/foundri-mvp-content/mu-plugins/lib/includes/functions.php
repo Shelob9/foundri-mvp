@@ -66,3 +66,18 @@ function foundri_print_handelbars_js_templates() {
 		printf( '<script id="%1s" type="text/x-handlebars-template">%2s</script>', $id, $template );
 	}
 }
+
+/**
+ * The ask types
+ *
+ * @since 0.0.1
+ *
+ * @return array
+ */
+function foundri_ask_types() {
+	return array(
+		'talk' => __( 'Talk About', 'foundri' ),
+		'find_job' => __( 'Find A Job', 'foundri' ),
+		'offer_job' => __( 'Hire Someone', 'foundri' )
+	);
+}
