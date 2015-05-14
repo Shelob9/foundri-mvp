@@ -143,7 +143,7 @@ abstract class get_item {
 			'cache_mode' => 'cache',
 		);
 
-		if ( method_exists( $this, 'where_clause' ) ) {
+		if ( method_exists( $this, 'where_clause' ) && is_string( $this->where_clause() )) {
 			$params[ 'where' ] = $this->where_clause();
 		} elseif ( property_exists( $this, 'where_pattern') ) {
 			$params[ 'where' ] = sprintf( $this->where_pattern, $this->id );
@@ -164,6 +164,10 @@ abstract class get_item {
 			$search = $wpdb->esc_like( $this->search_param );
 			$params[ 'search' ] = esc_sql( '%' . $search . '%' );
 
+		}
+
+		if ( property_exists( $this, 'limit' ) ) {
+			$params[ 'limit' ] = $this->limit;
 		}
 
 		$this->pods->find( $params );
@@ -204,6 +208,14 @@ abstract class get_item {
 				$data[ $field ] = $_value;
 			}
 
+		}
+
+		if ( FOUNDRI_ASK == $this->pod_name ) {
+			$data[ 'link' ] = foundri_link( $this->pods->display( 'permalink' ) );
+			$data[ 'link_markup' ] = foundri_link_markup( $this->pods->display( 'permalink' ), $this->pods->display( 'name' ) );
+		}else{
+			$data[ 'link' ] = foundri_link( $this->pods->id() );
+			$data[ 'link_markup' ] = foundri_link_markup( $this->pods->id(), $this->pods->display( 'post_title' ) );
 		}
 
 		if ( $set_property ) {

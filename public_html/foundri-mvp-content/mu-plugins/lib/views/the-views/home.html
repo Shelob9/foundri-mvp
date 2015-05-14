@@ -1,0 +1,31 @@
+<div class="container"  id="foundri-home">
+    <div class="row">
+        <h1>Foundri: Home</h1>
+    </div>
+    
+    <div class="row">
+
+         <div id="public-communities" class="col-sm-12 col-md-6">
+             <h3>Public Communities</h3>
+             <ul class="community-list">
+                 {{#each public_communities}}
+                     <li class="container community community-preview community-{{post_name}}" id="community-{{ID}}">
+                         {{{link_markup}}
+                     </li>
+                 {{/each}}
+             </ul>
+         </div>
+
+        <div id="public-communities" class="col-sm-12 col-md-6">
+            <h3>My Communities</h3>
+            <ul class="community-list">
+                {{#each users_communities}}
+                    <li class="container community community-preview community-{{post_name}}" id="community-{{ID}}">
+                        {{{link_markup}}
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+</div>

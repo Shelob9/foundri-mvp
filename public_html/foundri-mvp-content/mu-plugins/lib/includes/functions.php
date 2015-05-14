@@ -16,7 +16,7 @@
  */
 function foundri_view() {
 	$id = get_queried_object_id();
-	$template = false;
+	$template = $data = false;
 
 	if ( FOUNDRI_COMMUNITY == get_post_type( $id ) ) {
 
@@ -32,14 +32,23 @@ function foundri_view() {
 
 		$data = $item->display_data;
 
-
-		$template = FOUNDDRI_VIEW_DIR . $template;
-
-		$output =  caldera_metaplate_from_file( $template, null, $data );
-
-		return $output;
-
 	}
+
+	if ( is_home() ) {
+		$data = new \foundri\lib\data\home();
+		if ( $data->display_data ) {
+			$data = $data->display_data;
+			$template = 'home.html';
+		}else{
+			return;
+		}
+	}
+
+	$template = FOUNDDRI_VIEW_DIR . $template;
+
+	$output =  caldera_metaplate_from_file( $template, null, $data );
+
+	return $output;
 
 }
 
@@ -60,7 +69,8 @@ function foundri_print_handelbars_js_templates() {
 	foreach( array(
 		'foundri-ask-single' => 'ask-single',
 		'foundri-ask-preview' => 'ask-preview',
-		'foundri-community-single' => 'community-single'
+		'foundri-community-single' => 'community-single',
+		'home' => 'home'
 	) as $id => $template ) {
 		$template = FOUNDDRI_VIEW_DIR . $template . '.html';
 		$template = file_get_contents( $template );
@@ -82,3 +92,47 @@ function foundri_ask_types() {
 		'offer_job' => __( 'Hire Someone', 'foundri' )
 	);
 }
+
+/**
+ * Get link to a Foundri item.
+ *
+ * @since 0.0.1
+ *
+ * @param int|string $id_or_slug ID, or for ask permalink slug for the link, or use "home" to link to home.
+ *
+ * @return bool|string|void
+ */
+function foundri_link( $id_or_slug ) {
+	if ( 0 < (int) $id_or_slug ) {
+		$link = get_permalink( $id_or_slug );
+	}elseif( is_string( $id_or_slug ) ){
+		$link = home_url( $id_or_slug );
+	}elseif( $id_or_slug = 'home' ) {
+		$link = home_url();
+	}
+
+	return $link;
+}
+
+/**
+ * Get link markup for link to a Foundri item.
+ *
+ * IMPORTANT: Failure to use this function for creating an internal link is a violation of intergalactic law.
+ *
+ * @since 0.0.1
+ *
+ * @param int|string $id_or_slug ID, or for ask permalink slug for the link, or use "home" to link to home.
+ * @param string $text Link text
+ * @param null|string $title Optional, the ttile attribute for link
+ *
+ * @return string
+ */
+function foundri_link_markup( $id_or_slug, $text, $title = null ) {
+	if ( ! $title  ) {
+		$title = sprintf( __( 'Link to ', 'foundri' ) );
+	}
+	$link = foundri_link( $id_or_slug );
+
+	return sprintf( '<a href="%1s" class="foundri-link" data-foundri-internal="true" title="%2s">%3s</a>', $link, $title, $text );
+}
+
