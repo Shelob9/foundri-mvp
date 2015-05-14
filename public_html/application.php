@@ -30,6 +30,9 @@ define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
 if ( ! WP_LOCAL_DEV ) {
 	define( 'WP_DEBUG_DISPLAY', false );
+}else{
+	define( 'WP_DEBUG_DISPLAY', true );
+	define( 'SCRIPT_DEBUG', true );
 }
 
 
@@ -49,7 +52,8 @@ define( 'DISALLOW_FILE_MODS', true);
 define( 'WP_MEMORY_LIMIT', '512M' );
 
 //no cron
-define('DISABLE_WP_CRON', 'true');
+define('DISABLE_WP_CRON', 'true' );
+
 
 //load memcached for object caching if possible
 if ( file_exists( dirname( __FILE__ ) . '/memcached.php' ) ) {
