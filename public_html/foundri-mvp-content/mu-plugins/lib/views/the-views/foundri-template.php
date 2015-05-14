@@ -11,7 +11,10 @@
 		<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
 		<![endif]-->
 
-		<?php wp_head(); ?>
+	<?php
+		global $post;
+		wp_head();
+	?>
 	</head>
 	<body <?php body_class(); ?>>
 		<div id="page" class="hfeed site">
@@ -38,10 +41,12 @@
 	<script>
 		var json_url = "<?php echo get_rest_url(); ?>";
 		function foundri_ask_search( obj ) {
+			console.log( obj );
 			data = {
 				type: obj.data.type_search,
 				text: obj.data.text_search,
-				community: obj.data.community
+				//community: obj.data.community
+				community: <?php echo $post->ID; ?>
 			};
 			type = obj.data.type_search;
 			text = obj.data.text_search;

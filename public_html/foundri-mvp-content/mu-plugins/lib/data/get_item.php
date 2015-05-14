@@ -87,9 +87,7 @@ abstract class get_item {
 	 */
 	public function __construct( $id, $markup_fields = false, $params = false ) {
 		if ( $params && is_array( $params ) ) {
-			foreach( $params as $param => $value ) {
-				$this->$$param = $value;
-			}
+			$this->create_properties( $params );
 
 		}
 		$this->pre_set();
@@ -237,6 +235,23 @@ abstract class get_item {
 	protected function pre_set() {
 		return;
 	}
+
+	/**
+	 * Add extras properties to class.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access private
+	 *
+	 * @param array $props 'name' => 'value' pairs of properties to set.
+	 */
+	private function create_properties( $props){
+		foreach ( $props as $name => $value  ) {
+			$this->{$name} = $value;
+		}
+
+	}
+
 
 
 

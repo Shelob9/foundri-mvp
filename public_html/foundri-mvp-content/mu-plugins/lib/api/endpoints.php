@@ -63,7 +63,7 @@ class endpoints extends vars {
 		}
 		$type = pods_v_sanitized( 'ask_type', $params );
 
-		$id = absint( 'community', pods_v( 'ask_type', $params ) );
+		$id = absint( 'community', pods_v( 'community', $params ) );
 
 		$class_params = array(
 			'ask_type' => $type,
@@ -72,10 +72,12 @@ class endpoints extends vars {
 
 		$query = new ask_query( $id, false, $class_params );
 		if ( 0 < $query->pods->total() ) {
-			$response = new \WP_HTTP_Response( $query->json_data, 200, array() );
+			$response = new \WP_REST_Response( $query->json_data, 200, array() );
 		}else{
-			$response = new \WP_HTTP_Response( '', 404, array() );
+			$response = new \WP_REST_Response( '', 404, array() );
 		}
+
+		$response->set_matched_route(  $request->get_route() );
 
 		return $response;
 
