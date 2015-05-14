@@ -27,7 +27,7 @@ $form = array (
 			'fields' =>
 				array (
 					'ask_type' => '1:1',
-					'i_want_to' => '1:2',
+					'ask_details' => '1:2',
 					'community_id' => '2:1',
 					'user_id' => '2:1',
 					'save' => '2:2',
@@ -78,11 +78,11 @@ $form = array (
 						'type' => '',
 					),
 			),
-			'i_want_to' => array (
-				'ID' => 'i_want_to',
+			'ask_details' => array (
+				'ID' => 'ask_details',
 				'type' => 'text',
 				'label' => 'I Want To',
-				'slug' => 'i_want_to',
+				'slug' => 'ask_details',
 				'required' => 1,
 				'caption' => '',
 				'config' =>
@@ -167,7 +167,7 @@ $form = array (
 				),
 			'values' =>
 				array (
-					0 => '{user:user_login}  %ask_type% %i_want_to%',
+					0 => '{user:user_login}  %ask_type% %ask_details%',
 					1 => '{embed_post:ID}',
 					2 => get_current_user_id(),
 				),
