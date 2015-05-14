@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width">
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script src=//https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
 
 		<!--[if lt IE 9]>
 		<script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/html5.js"></script>
@@ -59,7 +59,7 @@
 						template = Handlebars.compile( source );
 						html = template( ask );
 						$( asks_el ).append( html );
-					}
+					});
 				},
 				'json'
 			);

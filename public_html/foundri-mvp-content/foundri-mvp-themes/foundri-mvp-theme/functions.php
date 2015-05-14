@@ -45,7 +45,7 @@
 		
 	wp_enqueue_style( 'foundri_mvp', get_template_directory_uri() . "/assets/css/foundri_mvp{$postfix}.css", array(), FOUNDRI_MVP_VERSION );
  }
- add_action( 'wp_enqueue_scripts', 'foundri_mvp_scripts_styles' );
+ //add_action( 'wp_enqueue_scripts', 'foundri_mvp_scripts_styles' );
  
  /**
   * Add humans.txt to the <head> element.
@@ -55,4 +55,4 @@
 	
 	echo apply_filters( 'foundri_mvp_humans', $humans );
  }
- add_action( 'wp_head', 'foundri_mvp_header_meta' );
+ //add_action( 'wp_head', 'foundri_mvp_header_meta' );
