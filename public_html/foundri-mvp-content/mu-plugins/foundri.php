@@ -39,9 +39,6 @@ add_action( 'init', function() {
 		return $template;
 	});
 
-
-
-
 	/**
 	 * Action after foundri boots
 	 *

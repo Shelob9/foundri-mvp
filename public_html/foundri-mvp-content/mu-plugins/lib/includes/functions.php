@@ -62,7 +62,8 @@ function foundri_print_handelbars_js_templates() {
 		'foundri-ask-preview' => 'ask-preview',
 		'foundri-community-single' => 'community-single'
 	) as $id => $template ) {
-		$template = FOUNDDRI_VIEW_DIR . $template;
+		$template = FOUNDDRI_VIEW_DIR . $template . '.html';
+		$template = file_get_contents( $template );
 		printf( '<script id="%1s" type="text/x-handlebars-template">%2s</script>', $id, $template );
 	}
 }

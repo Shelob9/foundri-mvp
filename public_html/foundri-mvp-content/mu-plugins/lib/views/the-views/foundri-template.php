@@ -34,33 +34,27 @@
 
 		</div><!-- #page .site -->
 
-	<?php
-		foundri_print_handelbars_js_templates();
-		wp_footer();
-	?>
-	<script>
-		var json_url = "<?php echo get_rest_url(); ?>";
-		function foundri_ask_search( obj ) {
-			console.log( obj );
-			data = {
-				type: obj.data.type_search,
-				text: obj.data.text_search,
-				//community: obj.data.community
-				community: <?php echo $post->ID; ?>
-			};
-			type = obj.data.type_search;
-			text = obj.data.text_search;
 
-			text = encodeURIComponent( text );
+	<script>
+
+		function foundri_ask_search( obj ) {
+
+			data = {
+				ask_type: obj.data.type_search,
+				text: encodeURIComponent( obj.data.text_search ),
+				community:<?php echo $post->ID; ?>
+			};
+
 			$.get(
 				"<?php echo esc_url( foundri_api_url( 'asks' ) ); ?>",
 				data,
 				function( response ) {
-					asks_el = document.getElementById( 'asks' );
+
+					asks_el = document.getElementById( 'ask-results' );
 					asks_el.innerHTML = '';
-					ask = JSON.parse( response );
-					$.each( asks, function ( i, ask ) {
-						source = $( 'foundri-ask-preview' ).html();
+
+					$.each( response, function ( i, ask ) {
+						source = $( '#foundri-ask-preview' ).html();
 						template = Handlebars.compile( source );
 						html = template( ask );
 						$( asks_el ).append( html );
@@ -68,9 +62,15 @@
 				},
 				'json'
 			);
-
 		}
+
+
+
 	</script>
+		<?php
+		foundri_print_handelbars_js_templates();
+		wp_footer();
+		?>
 
 	</body>
 </html>
