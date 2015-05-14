@@ -16,11 +16,11 @@ module.exports = function( grunt ) {
 					' * Licensed GPLv2+' +
 					' */\n'
 			},
-			foundri_mvp: {
+			foundri_theme: {
 				src: [
-					'assets/js/src/foundri_mvp.js'
+					'assets/js/src/foundri_theme.js'
 				],
-				dest: 'assets/js/foundri_mvp.js'
+				dest: 'assets/js/foundri_theme.js'
 			}
 		},
 		jshint: {
@@ -45,7 +45,7 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					'assets/js/foundri_mvp.min.js': ['assets/js/foundri_mvp.js']
+					'assets/js/foundri_theme.min.js': ['assets/js/foundri_theme.js']
 				},
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -65,7 +65,7 @@ module.exports = function( grunt ) {
 		sass:   {
 			all: {
 				files: {
-					'assets/css/foundri_mvp.css': 'assets/css/sass/foundri_mvp.scss'
+					'assets/css/foundri_theme.css': 'assets/css/sass/foundri_theme.scss'
 				}
 			}
 		},
@@ -81,7 +81,7 @@ module.exports = function( grunt ) {
 				expand: true,
 				
 				cwd: 'assets/css/',
-				src: ['foundri_mvp.css'],
+				src: ['foundri_theme.css'],
 				
 				dest: 'assets/css/',
 				ext: '.min.css'
@@ -108,8 +108,11 @@ module.exports = function( grunt ) {
 	} );
 
 	// Default task.
+
+    grunt.registerTask( 'js', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask( 'css', [ 'sass', 'cssmin'] );
 	
-	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'sass', 'cssmin'] );
+	grunt.registerTask( 'default', ['js', 'css'] );
 	
 
 	grunt.util.linefeed = '\n';
