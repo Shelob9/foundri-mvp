@@ -48,6 +48,9 @@ define( 'DISALLOW_FILE_MODS', true);
 //memory
 define( 'WP_MEMORY_LIMIT', '512M' );
 
+//no cron
+define('DISABLE_WP_CRON', 'true');
+
 //load memcached for object caching if possible
 if ( file_exists( dirname( __FILE__ ) . '/memcached.php' ) ) {
 	$memcached_servers = include( dirname( __FILE__ ) . '/memcached.php' );
