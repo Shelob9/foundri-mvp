@@ -22,7 +22,7 @@ class form_load {
 	 */
 	public $forms = array(
 		'ask_make',
-		'login',
+		'login_or_register',
 		'bio_profile',
 		'ask_search',
 		'community_search'

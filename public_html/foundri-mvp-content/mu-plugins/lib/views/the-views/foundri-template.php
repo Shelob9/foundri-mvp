@@ -13,6 +13,11 @@
 
 	<?php
 		global $post;
+		if ( ! is_object( $post ) ) {
+			$post = new stdClass();
+			$post->ID = 0;
+		}
+
 		wp_head();
 	?>
 	</head>

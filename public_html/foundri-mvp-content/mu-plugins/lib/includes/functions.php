@@ -15,6 +15,7 @@
  * @return null|string
  */
 function foundri_view() {
+	$query = get_queried_object();
 	$id = get_queried_object_id();
 	$template = $data = false;
 
@@ -34,21 +35,26 @@ function foundri_view() {
 
 	}
 
-	if ( is_home() ) {
+
+	if ( is_null( $query ) || 0 == $id ) {
+
 		$data = new \foundri\lib\data\home();
 		if ( $data->display_data ) {
-			$data = $data->display_data;
+			$data     = $data->display_data;
 			$template = 'home.html';
-		}else{
+		} else {
 			return;
 		}
+
 	}
 
 	$template = FOUNDDRI_VIEW_DIR . $template;
 
-	$output =  caldera_metaplate_from_file( $template, null, $data );
+	if ( file_exists( $template ) ) {
+		$output = caldera_metaplate_from_file( $template, null, $data );
 
-	return $output;
+		return $output;
+	}
 
 }
 

@@ -51,12 +51,18 @@ class home {
 			$data[ 'public_communities' ] = $query->display_data;
 		}
 
-		$query = $this->query_users_communities();
-		if( 0 < $query->pods->total() ) {
-			$data[ 'users_communities' ] = $query->display_data;
+		if ( is_user_logged_in() ) {
+			$query = $this->query_users_communities();
+			if ( 0 < $query->pods->total() ) {
+				$data['users_communities'] = $query->display_data;
+			}
 		}
 
+		$data[ 'login_form' ] = \Caldera_Forms::render_form( 'login_or_register' );
+
+
 		$this->display_data = $data;
+
 	}
 
 	/**

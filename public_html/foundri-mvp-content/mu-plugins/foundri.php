@@ -46,8 +46,6 @@ add_action( 'init', function() {
 	 */
 	do_action( 'foundri_post_boot' );
 
-
-
 });
 
 
