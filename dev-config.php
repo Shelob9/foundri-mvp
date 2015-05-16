@@ -33,3 +33,10 @@ define( 'SAVEQUERIES', true );
  */
 define( "PODS_DEVELOPER", true );
 define( "PODS_GITHUB_UPDATE", true );
+
+/**
+ * URLS
+ */
+define( 'WP_HOME', 'http://foundri-mvp.dev/' );
+define( 'WP_SITEURL', 'http://foundri-mvp.dev/public_html/wp' );
+
