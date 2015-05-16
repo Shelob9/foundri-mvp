@@ -8,6 +8,7 @@
  * @link      
  * @copyright 2015 Foundri
  */
+
 // Useful global constants
 define( 'FOUNDRI_MVP_VERSION', '0.1.0' );
 define( 'FOUNDRI_ASK', 'ask' );
@@ -24,20 +25,19 @@ add_action( 'init', function() {
 	 * @since 0.0.1
 	 */
 	do_action( 'foundri_pre_boot' );
+	
 	include_once( dirname( __FILE__ ) . '/lib/vendor/autoload.php' );
+
+	/**
+	 * Include functions/shortcodes
+	 */
 	include_once( dirname( __FILE__ ) . '/lib/includes/functions.php' );
 	include_once( dirname( __FILE__ ) . '/lib/includes/shortcodes.php' );
 
 	/**
-	 * Load classes
+	 * Load Main class
 	 */
-	new \foundri\lib\forms\load\form_load();
-	new \foundri\lib\forms\process\process_forms();
-
-	add_filter( 'template_include', function() {
-		$template = dirname( __FILE__ ) . '/lib/views/the-views/foundri-template.php';
-		return $template;
-	});
+	new \foundri\foundri();
 
 	/**
 	 * Action after foundri boots
@@ -46,10 +46,4 @@ add_action( 'init', function() {
 	 */
 	do_action( 'foundri_post_boot' );
 
-});
-
-
-add_action( 'rest_api_init', function() {
-	$api = new foundri\lib\api\endpoints();
-	$api->register_routes();
 });
