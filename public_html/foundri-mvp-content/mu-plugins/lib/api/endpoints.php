@@ -38,6 +38,10 @@ class endpoints extends vars {
 						'search' => array(
 							'default' => 0,
 							'sanitize_callback' => 'urldecode'
+						),
+						'page'  => array(
+							'default' => 1,
+							'sanitize_callback' => 'absint',
 						)
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
@@ -72,6 +76,7 @@ class endpoints extends vars {
 			$class_params = array(
 				'ask_type'     => $type,
 				'search_param' => $text_search,
+				'page'         => $params[ 'page' ]
 			);
 
 			$query = new ask_query( $id, false, $class_params );

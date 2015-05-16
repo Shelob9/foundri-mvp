@@ -170,6 +170,10 @@ abstract class get_item {
 			$params[ 'limit' ] = $this->limit;
 		}
 
+		if ( property_exists( $this, 'page' ) ) {
+			$params[ 'page' ] = $this->page;
+		}
+
 		$this->pods->find( $params );
 
 		if (  $this->single && 0 < $this->id && $this->id != $this->pods->id ) {
