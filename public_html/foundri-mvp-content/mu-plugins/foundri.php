@@ -25,7 +25,7 @@ add_action( 'init', function() {
 	 * @since 0.0.1
 	 */
 	do_action( 'foundri_pre_boot' );
-	
+
 	include_once( dirname( __FILE__ ) . '/lib/vendor/autoload.php' );
 
 	/**
@@ -37,7 +37,7 @@ add_action( 'init', function() {
 	/**
 	 * Load Main class
 	 */
-	new \foundri\foundri();
+	new \foundri\lib\foundri();
 
 	/**
 	 * Action after foundri boots
