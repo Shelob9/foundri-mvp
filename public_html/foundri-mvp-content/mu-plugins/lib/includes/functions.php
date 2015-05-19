@@ -15,46 +15,7 @@
  * @return null|string
  */
 function foundri_view() {
-	$query = get_queried_object();
-	$id = get_queried_object_id();
-	$template = $data = false;
-
-	if ( FOUNDRI_COMMUNITY == get_post_type( $id ) ) {
-
-
-		if ( ! is_null( $ask = pods_v_sanitized( 'ask' ) ) && 0 < absint( $ask ) ) {
-			$template = 'ask-single.html';
-			$item = new \foundri\lib\data\asks( $id, true );
-		}else{
-			$template = 'community-single.html';
-			$item = new \foundri\lib\data\community( $id, true );
-
-		}
-
-		$data = $item->display_data;
-
-	}
-
-
-	if ( is_null( $query ) || 0 == $id ) {
-
-		$data = new \foundri\lib\data\home();
-		if ( $data->display_data ) {
-			$data     = $data->display_data;
-			$template = 'home.html';
-		} else {
-			return;
-		}
-
-	}
-
-	$template = FOUNDDRI_VIEW_DIR . $template;
-
-	if ( file_exists( $template ) ) {
-		$output = caldera_metaplate_from_file( $template, null, $data );
-
-		return $output;
-	}
+	return \foundri\lib\views\view_loader::get_view();
 
 }
 

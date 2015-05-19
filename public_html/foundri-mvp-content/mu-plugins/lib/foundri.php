@@ -37,7 +37,7 @@ class foundri {
 	 */
 	public function template( $template ) {
 		if ( ! $this->is_view_api() ) {
-			FOUNDDRI_VIEW_DIR . 'foundri-template.php';
+			$template = FOUNDDRI_VIEW_DIR . 'foundri-template.php';
 		}
 
 		return $template;
