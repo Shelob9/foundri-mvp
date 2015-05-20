@@ -43,6 +43,14 @@ class ask extends get_item {
 			'ID',
 			'post_title',
 		),
+		'author' => array(
+			'first_name',
+			'last_name',
+			'bio',
+			'email',
+			'twitter',
+			'facebook',
+		)
 
 	);
 }

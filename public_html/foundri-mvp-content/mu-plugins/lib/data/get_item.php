@@ -199,13 +199,29 @@ abstract class get_item {
 		foreach( $this->display_fields as $field => $sub_fields ) {
 			$_value = $this->pods->field( $field );
 			if ( ! empty( $sub_fields ) ) {
-				foreach( $sub_fields as $sub_field ) {
-					if ( isset( $_value[ 0 ] ) ) {
-						foreach( $_value as $i => $_v ) {
-							$data[ $field ][ $i ] = pods_v( $sub_field, $_v );
+
+				//fuck this hack for author user_meta fields
+				if( 'ask' == $this->pod_name && 'author' == $field ) {
+					$user_meta = get_user_meta( pods_v( 'ID', $_value ) );
+					foreach ( $sub_fields as $sub_field ) {
+						$_v = pods_v( $sub_field, $user_meta );
+						if ( is_array( $_v ) && isset( $_v[0] ) ) {
+							$_v = $_v[0];
+						}else{
+							$_v = '';
 						}
-					}else {
-						$data[ $field ] = pods_v( $sub_field, $_value );
+						$data[ $field ][ $sub_field ] = $_v;
+
+					}
+				}else{
+					foreach ( $sub_fields as $sub_field ) {
+						if ( isset( $_value[0] ) ) {
+							foreach ( $_value as $i => $_v ) {
+								$data[ $field ][ $i ] = pods_v( $sub_field, $_v );
+							}
+						} else {
+							$data[ $field ] = pods_v( $sub_field, $_value );
+						}
 					}
 				}
 			}else{
