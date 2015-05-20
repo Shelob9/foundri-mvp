@@ -13,6 +13,7 @@ namespace foundri\lib\forms\process;
 
 
 use foundri\lib\data\save\ask;
+use foundri\lib\data\save\bio_profile;
 
 class process_forms {
 	public function __construct() {
@@ -34,13 +35,17 @@ class process_forms {
 
 			$form_id = $form[ 'ID' ];
 			switch( $form_id ) {
-				case 'ask_make' == $field_id :
+				case 'ask_make' == $form_id :
 					$embeded_post_id = absint( $_POST[ '_cf_cr_pst' ] );
 					$data[ 'community' ] = $embeded_post_id;
 					ask::make_save( $data );
 					break;
 				case 'bio_profile' == $form_id :
-
+					$data[ 'profile_cf_entry_id' ] = \Caldera_Forms::get_field_data( '_entry_id', $form );
+					bio_profile::make_save( $data );
+					break;
+				default :
+					break;
 			}
 
 
