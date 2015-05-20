@@ -20,21 +20,32 @@ class process_forms {
 	}
 
 	public function route( $form ) {
-		$data= array();
-		foreach( $form[ 'fields' ] as $field_id => $field){
-			$data[ $field['slug'] ] = \Caldera_Forms::get_field_data( $field_id, $form );
-		}
-
-		$embeded_post_id = absint( $_POST[ '_cf_cr_pst' ] );
-
-
-		$form = strip_tags( $_POST[ '_cf_frm_id' ] );
-		if ( in_array( $form, array(
-			'ask_make'
+		if ( in_array( $form[ 'ID' ], array(
+			'ask_make',
+			'bio_profile'
 		) ) ) {
-			$data[ 'community' ] = $embeded_post_id;
-			ask::make_save( $data );
+			$data= array();
+			foreach( $form[ 'fields' ] as $field_id => $field){
+				$data[ $field['slug'] ] = \Caldera_Forms::get_field_data( $field_id, $form );
+			}
+
+
+
+
+			$form_id = $form[ 'ID' ];
+			switch( $form_id ) {
+				case 'ask_make' == $field_id :
+					$embeded_post_id = absint( $_POST[ '_cf_cr_pst' ] );
+					$data[ 'community' ] = $embeded_post_id;
+					ask::make_save( $data );
+					break;
+				case 'bio_profile' == $form_id :
+
+			}
+
+
 		}
+
 
 
 	}
