@@ -18,7 +18,7 @@ define( 'FOUNDDRI_VIEW_DIR', dirname( __FILE__ ) . '/lib/views/the-views/' );
 /**
  * Boot Foundri
  */
-add_action( 'init', function() {
+add_action( 'plugins_loaded', function() {
 	/**
 	 * Action before foundri boots
 	 *
