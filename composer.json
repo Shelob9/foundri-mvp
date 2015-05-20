@@ -38,6 +38,10 @@
     {
       "type" : "git",
       "url"  : "https://github.com/WP-API/WP-API"
+    },
+    {
+      "type" : "git",
+      "url" : "https://github.com/Desertsnowman/Caldera-Forms"
     }
   ],
   "require"     : {
@@ -51,7 +55,8 @@
     "calderawp/caldera-custom-login"                            : "*",
     "calderawp/cf-users"                                        : "*",
     "calderawp/caldera-easy-pods"                               : "*",
-    "wp-api/wp-api"                                             : "*"
+    "wp-api/wp-api"                                             : "*",
+    "Desertsnowman/Caldera-Forms"                               : "1.2.x"
   },
   "require-dev" : {
     "wpackagist-plugin/log-deprecated-notices"              : "*",
