@@ -13,7 +13,7 @@
 namespace foundri\lib\forms\load;
 
 
-use foundri_mvp_lib\forms\form;
+use foundri\lib\forms\form;
 
 class output extends form{
 

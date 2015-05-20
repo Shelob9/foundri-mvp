@@ -12,7 +12,7 @@
 namespace foundri\lib\forms;
 
 
-use foundri_mvp_lib\forms\load\form_load;
+use foundri\lib\forms\load\form_load;
 
 abstract class form {
 

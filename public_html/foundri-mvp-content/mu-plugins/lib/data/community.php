@@ -12,6 +12,9 @@
 namespace foundri\lib\data;
 
 
+use foundri\lib\forms\load\form_load;
+use foundri\lib\forms\load\output;
+
 class community extends get_item {
 
 	/**
@@ -69,8 +72,8 @@ class community extends get_item {
 	protected function set_markup_fields() {
 		$fields = array(
 			'forms' => array(
-				'make_ask' => \Caldera_Forms::render_form( 'ask_make' ),
-				'ask_search' => \Caldera_Forms::render_form( 'ask_search' ),
+				'ask_make' => output::ask_make(),
+				'ask_search' => output::ask_search()
 			),
 		);
 

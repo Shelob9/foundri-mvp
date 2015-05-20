@@ -12,6 +12,7 @@ namespace foundri\lib\data;
 
 
 use foundri\lib\data\communities;
+use foundri\lib\forms\load\output;
 
 class home {
 
@@ -58,7 +59,7 @@ class home {
 			}
 		}
 
-		$data[ 'login_form' ] = \Caldera_Forms::render_form( 'login_or_register' );
+		$data[ 'login_form' ] = output::login_or_register();
 
 
 		$this->display_data = $data;
