@@ -54,14 +54,13 @@
 				"<?php echo esc_url( foundri_api_url( 'asks' ) ); ?>",
 				data,
 				function( response ) {
-
 					asks_el = document.getElementById( 'ask-results' );
 					asks_el.innerHTML = '';
 
 					$.each( response, function ( i, ask ) {
 						source = $( '#foundri-ask-preview' ).html();
 						template = Handlebars.compile( source );
-						html = template( ask );
+						html = '<div class="col-sm-6 col-md-3">' + template( ask ) + '</div>';
 						$( asks_el ).append( html );
 					});
 				},
