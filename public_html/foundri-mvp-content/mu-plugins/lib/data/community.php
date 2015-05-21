@@ -40,6 +40,7 @@ class community extends get_item {
 	 */
 	protected $display_fields = array(
 		'post_title' => array(),
+		'post_content' => array(),
 		'post_name'=> array(),
 		'members' => array(
 			'ID',
