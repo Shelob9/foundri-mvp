@@ -1,9 +1,11 @@
-<div class="container ask ask-single ask-{{post_name}}" id="ask-{{id}}">
+<div class="container ask ask-single ask-{{id}}" id="ask-{{id}}">
     <div class="row" id="ask-single-top">
-        {{{name}}}
+        {{author.first_name}} {{author.last_name}} {{author.twitter}} {{author.facebook}}
     </div>
 
     <div class="row" id="ask-single-bottom">
         {{{ask_details}}}
     </div>
+
+
 </div>

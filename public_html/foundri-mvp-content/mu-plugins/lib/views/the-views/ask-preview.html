@@ -1,9 +1,28 @@
 <div class="container ask ask-preview ask-{{post_name}}" id="ask-{{id}}">
     <div class="row" id="ask-single-top">
-        {{{name}}}
+        <p class="who">
+            {{author.first_name}} {{author.last_name}}
+        </p>
+        <p class="details">
+            {{{ask_details}}}
+        </p>
+
+        <div class="row" id="ask-single-bottom">
+            <ul>
+                <li>
+                    <a href="http://facebook.com/{{author.facebook}}" title="Facebook Link" target="_blank">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://twitter.com/{{author.twitter}}" title="Twitter Link" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
     </div>
 
-    <div class="row" id="ask-single-bottom">
-        {{{ask_details}}}
-    </div>
 </div>
