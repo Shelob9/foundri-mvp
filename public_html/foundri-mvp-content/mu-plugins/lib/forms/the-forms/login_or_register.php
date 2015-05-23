@@ -16,7 +16,7 @@ $form = array (
 		'db_support' => 1,
 		'pinned' => 0,
 		'hide_form' => 1,
-		'check_honey' => 1,
+		'check_honey' => null,
 		'success' => '',
 		'avatar_field' => '',
 		'form_ajax' => 1,
@@ -354,7 +354,19 @@ $form = array (
 							),
 						'conditions' =>
 							array (
-								'type' => '',
+								'type' => 'show',
+								'group' =>
+									array (
+										'login_conditional' =>
+											array (
+												'1' =>
+													array (
+														'field' => 'login_or_register',
+														'compare' => 'is',
+														'value' => 'login',
+													),
+											),
+									),
 							),
 					),
 				'user_register' =>
@@ -382,7 +394,19 @@ $form = array (
 							),
 						'conditions' =>
 							array (
-								'type' => '',
+								'type' => 'show',
+								'group' =>
+									array (
+										'register_conditional' =>
+											array (
+												'1' =>
+													array (
+														'field' => 'login_or_register',
+														'compare' => 'is',
+														'value' => 'register',
+													),
+											),
+									),
 							),
 					),
 			),
