@@ -33,12 +33,13 @@
             </div>
         {{/is}}
     </div>
-
+    {{#is is_user_logged_in}}
     <div class="row">
         <div id="profile-form" class="col-sm-12 col-md-12">
             <h3>Edit Profile</h3>
             {{{profile_form}}}
         </div>
     </div>
+    {{/is}}
 
 </div>
