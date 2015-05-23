@@ -56,7 +56,8 @@
     "calderawp/cf-users"                                        : "*",
     "calderawp/caldera-easy-pods"                               : "*",
     "wp-api/wp-api"                                             : "*",
-    "Desertsnowman/Caldera-Forms"                               : "1.2.x"
+    "Desertsnowman/Caldera-Forms"                               : "1.2.x",
+    "calderawp/caldera-modals"                                  : "dev-master"
   },
   "require-dev" : {
     "wpackagist-plugin/log-deprecated-notices"              : "*",
