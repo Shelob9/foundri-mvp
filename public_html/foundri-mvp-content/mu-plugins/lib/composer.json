@@ -8,7 +8,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-      "calderawp/metaplate-core" : "dev-master"
+      "calderawp/metaplate-core" : "dev-master",
+      "calderawp/caldera-modals" : "dev-master"
     },
     "autoload": {
     "psr-4": {
