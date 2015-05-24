@@ -1,10 +1,38 @@
 <div class="container ask ask-single ask-{{id}}" id="ask-{{id}}">
     <div class="row" id="ask-single-top">
-        {{author.first_name}} {{author.last_name}} {{author.twitter}} {{author.facebook}}
+        <div id="ask-who" class="col-sm-6">
+            {{author.first_name}} {{author.last_name}}
+        </div>
+        <div id="ask-title" class="col-sm-6">
+            {{{name}}}
+        </div>
+    </div>
+
+    <div class="row" id="ask-single-middle">
+        <div id="ask-detail" class="col-sm-12">
+            {{{ask_details}}}
+        </div>
+
     </div>
 
     <div class="row" id="ask-single-bottom">
-        {{{ask_details}}}
+        <ul>
+            <li>
+                <a href="http://facebook.com/{{author.facebook}}" title="Facebook Link" target="_blank">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://twitter.com/{{author.twitter}}" title="Twitter Link" target="_blank">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:{{email}}" title="Send Email">
+                    <i class="fa fa-envelope-o"></i>
+                </a>
+            </li>
+        </ul>
     </div>
 
 

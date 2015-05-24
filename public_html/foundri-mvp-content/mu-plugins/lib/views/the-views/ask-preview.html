@@ -1,33 +1,16 @@
 <a
-    class=" ask ask-preview ask"
+    class="container ask ask-preview ask"
     data-ask-id="{{id}}"
     id="ask-{{id}}"
     href="#ask-results"
 >
     <div class="row" id="ask-single-top">
-        <p class="who">
+        <div id="ask-who" class="col-sm-6">
             {{author.first_name}} {{author.last_name}}
-        </p>
-        <p class="details">
-            {{{ask_details}}}
-        </p>
-
-        <div class="row" id="ask-single-bottom">
-            <ul>
-                <li>
-                    <a href="http://facebook.com/{{author.facebook}}" title="Facebook Link" target="_blank">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://twitter.com/{{author.twitter}}" title="Twitter Link" target="_blank">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-            </ul>
         </div>
-
-
+        <div id="ask-title" class="col-sm-6">
+            {{{name}}}
+        </div>
     </div>
 
 </a>
