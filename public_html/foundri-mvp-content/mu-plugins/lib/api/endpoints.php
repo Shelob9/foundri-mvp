@@ -64,9 +64,21 @@ class endpoints extends vars {
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
 				),
-
 			)
 		);
+
+		register_rest_route( "{$root}/{$version}", '/ask' . '/(?P<id>[\d]+)', array(
+				array(
+					'methods'         => \WP_REST_Server::DELETABLE,
+					'callback'        => array( $this, 'delete_item' ),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+
+
+
 	}
 
 	/**
@@ -132,6 +144,34 @@ class endpoints extends vars {
 			}
 		}else{
 			$response = new \WP_REST_Response( '', 404, array() );
+		}
+
+		$response->set_matched_route(  $request->get_route() );
+
+		return $response;
+
+	}
+
+	/**
+	 * Delete a single ask via API
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param \WP_REST_Request $request Full details about the request
+	 *
+	 * @return \WP_HTTP_Response
+	 */
+	public function delete_item( $request ) {
+		$params   = $request->get_params();
+		$response = new \WP_REST_Response( 0, 404, array() );
+		if ( 0 < $params[ 'id' ] ) {
+			$pods = pods( FOUNDRI_ASK, $params[ 'id' ] );
+
+			$deleted = $pods->delete( $params[ 'id' ] );
+			if ( $deleted ) {
+				$response = new \WP_REST_Response( $params[ 'id' ], 200, array() );
+			}
+
 		}
 
 		$response->set_matched_route(  $request->get_route() );

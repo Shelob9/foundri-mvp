@@ -202,7 +202,9 @@ abstract class get_item {
 
 				//fuck this hack for author user_meta fields
 				if( 'ask' == $this->pod_name && 'author' == $field ) {
-					$user_meta = get_user_meta( pods_v( 'ID', $_value ) );
+					$user_id = pods_v( 'ID', $_value );
+					$user_meta = get_user_meta( $user_id );
+
 					foreach ( $sub_fields as $sub_field ) {
 						$_v = pods_v( $sub_field, $user_meta );
 						if ( is_array( $_v ) && isset( $_v[0] ) ) {
@@ -213,6 +215,8 @@ abstract class get_item {
 						$data[ $field ][ $sub_field ] = $_v;
 
 					}
+
+					$data[ $field ][ 'ID' ] =  (int) $user_id;
 				}else{
 					foreach ( $sub_fields as $sub_field ) {
 						if ( isset( $_value[0] ) ) {

@@ -19,7 +19,6 @@
 		}
 
 		wp_head();
-	//echo \Caldera_Forms::render_form( 'CF5552ab21a05eb' );
 	?>
 	</head>
 	<body <?php body_class(); ?>>
@@ -61,13 +60,36 @@
 					$.each( response, function ( i, ask ) {
 						source = $( '#foundri-ask-preview' ).html();
 						template = Handlebars.compile( source );
-						html = '<div class="col-sm-6 col-md-3">' + template( ask ) + '</div>';
+						html = '<div class="col-sm-6 col-md-3">' + template( ask );
+						if ( foundri_user_id == ask.author.ID ) {
+							html += '<div><a href="#" data-ask-id="' + ask.ID + '" class="delete-ask btn btn-default" >Delete</a></div>';
+						}
+						html += '</div>';
 						$( asks_el ).append( html );
 					});
 				},
 				'json'
 			);
 		}
+
+		$( document ).on( 'click', '.delete-ask', function(e) {
+			e.preventDefault();
+			id = $( this ).attr( 'data-ask-id' );
+			parent = $( this ).parent().parent();
+
+			$.ajax( {
+				url: foundri_delete_ask_endpoint_url + id,
+				type: 'DELETE',
+				success: function() {
+					el = 'ask-' + id;
+					ask_el = document.getElementById( el );
+					if ( null != ask_el ) {
+						$( parent ).remove();
+					}
+				}
+			} )
+
+		});
 
 		$( document ).on( 'click', '.ask-preview', function(e) {
 			e.preventDefault;
@@ -88,6 +110,8 @@
 		var foundri_ask_results_el = document.getElementById( 'ask-results' );
 		var foundri_back_button_el =  document.getElementById( 'ask-close' );
 		var foundri_search_button = document.getElementById( 'search_2' );
+		var foundri_user_id = <?php echo (int) get_current_user_id(); ?>;
+		var foundri_delete_ask_endpoint_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'ask' ) ) ); ?>";
 
 		function foundri_get_ask_details( id ) {
 			data = {
