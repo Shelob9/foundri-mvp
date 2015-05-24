@@ -12,11 +12,28 @@
 namespace foundri\lib\api;
 
 
+use foundri\lib\api\callbacks\community;
 use foundri\lib\data\ask;
 use foundri\lib\data\ask_query;
 
 class endpoints extends vars {
 
+	protected $ask_cb_class;
+
+	protected $community_cb_class;
+
+	public function __construct() {
+		$this->set_ask_cb_class();
+		$this->set_community_cb_class();
+	}
+
+	protected function set_ask_cb_class() {
+		$this->ask_cb_class = new \foundri\lib\api\callbacks\ask();
+	}
+
+	protected function set_community_cb_class() {
+		$this->community_cb_class = new community();
+	}
 
 	/**
 	 * Register routes for the API
@@ -27,7 +44,7 @@ class endpoints extends vars {
 		register_rest_route( "{$root}/{$version}", '/asks', array(
 				array(
 					'methods'         => \WP_REST_Server::READABLE,
-					'callback'        => array( $this, 'get_items' ),
+					'callback'        => array( $this->ask_cb_class, 'get_items' ),
 					'args'            => array(
 						'community' => array(
 							'default' => 0,
@@ -54,7 +71,7 @@ class endpoints extends vars {
 		register_rest_route( "{$root}/{$version}", '/ask', array(
 				array(
 					'methods'         => \WP_REST_Server::READABLE,
-					'callback'        => array( $this, 'get_item' ),
+					'callback'        => array( $this->ask_cb_class, 'get_item' ),
 					'args'            => array(
 						'ask' => array(
 							'default' => 0,
@@ -70,7 +87,7 @@ class endpoints extends vars {
 		register_rest_route( "{$root}/{$version}", '/ask' . '/(?P<id>[\d]+)', array(
 				array(
 					'methods'         => \WP_REST_Server::DELETABLE,
-					'callback'        => array( $this, 'delete_item' ),
+					'callback'        => array( $this->ask_cb_class, 'delete_item' ),
 					'permission_callback' => array( $this, 'permissions_check' )
 				),
 			)
@@ -81,104 +98,6 @@ class endpoints extends vars {
 
 	}
 
-	/**
-	 * Get asks via API
-	 *
-	 * @since 0.0.1
-	 *
-	 * @param \WP_REST_Request $request Full details about the request
-	 *
-	 * @return \WP_HTTP_Response
-	 */
-	public function get_items( $request ) {
-		$params = $request->get_params();
-		$text_search = pods_v( 'search', $params );
-		if ( $text_search ) {
-			$text_search = urldecode( $text_search );
-		}
-
-		$type = pods_v( 'ask_type', $params );
-		if ( ! in_array( $type, array_keys( foundri_ask_types() ) ) ) {
-			$response = new \WP_REST_Response( '', 404, array() );
-		}else{
-			$id = pods_v( 'community', $params );
-
-			$class_params = array(
-				'ask_type'     => $type,
-				'search_param' => $text_search,
-				'page'         => $params[ 'page' ]
-			);
-
-			$query = new ask_query( $id, false, $class_params );
-			if ( 0 < $query->pods->total() ) {
-				$response = new \WP_REST_Response( $query->display_data, 200, array() );
-			} else {
-				$response = new \WP_REST_Response( '', 404, array() );
-			}
-		}
-
-		$response->set_matched_route(  $request->get_route() );
-
-		return $response;
-
-
-	}
-
-	/**
-	 * Get a single ask via API
-	 *
-	 * @since 0.0.1
-	 *
-	 * @param \WP_REST_Request $request Full details about the request
-	 *
-	 * @return \WP_HTTP_Response
-	 */
-	public function get_item( $request ) {
-		$params = $request->get_params();
-		if ( ! is_null( $id = pods_v('ask', $params ) ) && 0 < $id ) {
-			$query = new ask( $id );
-			if( is_object( $query->pods ) && is_array( $query->pods->row ) && $id == $query->pods->row[ 'id' ] ) {
-				$response = new \WP_REST_Response( $query->display_data, 200, array() );
-			}else {
-				$response = new \WP_REST_Response( '', 404, array() );
-			}
-		}else{
-			$response = new \WP_REST_Response( '', 404, array() );
-		}
-
-		$response->set_matched_route(  $request->get_route() );
-
-		return $response;
-
-	}
-
-	/**
-	 * Delete a single ask via API
-	 *
-	 * @since 0.0.1
-	 *
-	 * @param \WP_REST_Request $request Full details about the request
-	 *
-	 * @return \WP_HTTP_Response
-	 */
-	public function delete_item( $request ) {
-		$params   = $request->get_params();
-		$response = new \WP_REST_Response( 0, 404, array() );
-		if ( 0 < $params[ 'id' ] ) {
-			$pods = pods( FOUNDRI_ASK, $params[ 'id' ] );
-
-			$deleted = $pods->delete( $params[ 'id' ] );
-			if ( $deleted ) {
-				$response = new \WP_REST_Response( $params[ 'id' ], 200, array() );
-			}
-
-		}
-
-		$response->set_matched_route(  $request->get_route() );
-
-		return $response;
-
-	}
 
 	/**
 	 * Permissions check
