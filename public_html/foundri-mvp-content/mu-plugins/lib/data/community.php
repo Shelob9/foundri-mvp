@@ -46,15 +46,6 @@ class community extends get_item {
 			'ID',
 			'display_name',
 		),
-		'asks' => array(
-			'name',
-			'created',
-			'modified',
-			'author' => array(
-				'ID',
-				'display_name'
-			)
-		),
 		'logo' => array(),
 		'location' => array(),
 	);
@@ -76,7 +67,14 @@ class community extends get_item {
 				'ask_make' => output::ask_make(),
 				'ask_search' => output::ask_search()
 			),
+
 		);
+
+		if ( ! foundri_is_member( $this->id ) ) {
+			$fields[ 'join_button'] = foundri_join_community_link_markup( $this->id );
+		}else{
+			$fields[ 'join_button'] = '<span style="display:none;" id="is-already-member"></span>';
+		}
 
 		return $fields;
 	}
