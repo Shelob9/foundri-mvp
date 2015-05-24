@@ -12,6 +12,7 @@
 namespace foundri\lib\api;
 
 
+use foundri\lib\data\ask;
 use foundri\lib\data\ask_query;
 
 class endpoints extends vars {
@@ -43,6 +44,23 @@ class endpoints extends vars {
 							'default' => 1,
 							'sanitize_callback' => 'absint',
 						)
+					),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+
+			)
+		);
+
+		register_rest_route( "{$root}/{$version}", '/ask', array(
+				array(
+					'methods'         => \WP_REST_Server::READABLE,
+					'callback'        => array( $this, 'get_item' ),
+					'args'            => array(
+						'ask' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
 				),
@@ -91,6 +109,34 @@ class endpoints extends vars {
 
 		return $response;
 
+
+	}
+
+	/**
+	 * Get a single ask via API
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param \WP_REST_Request $request Full details about the request
+	 *
+	 * @return \WP_HTTP_Response
+	 */
+	public function get_item( $request ) {
+		$params = $request->get_params();
+		if ( ! is_null( $id = pods_v('ask', $params ) ) && 0 < $id ) {
+			$query = new ask( $id );
+			if( is_object( $query->pods ) && is_array( $query->pods->row ) && $id == $query->pods->row[ 'id' ] ) {
+				$response = new \WP_REST_Response( $query->display_data, 200, array() );
+			}else {
+				$response = new \WP_REST_Response( '', 404, array() );
+			}
+		}else{
+			$response = new \WP_REST_Response( '', 404, array() );
+		}
+
+		$response->set_matched_route(  $request->get_route() );
+
+		return $response;
 
 	}
 

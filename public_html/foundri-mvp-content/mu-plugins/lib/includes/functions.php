@@ -19,14 +19,20 @@ function foundri_view() {
 
 }
 
-
-function foundri_api_url( $endpoint = false ) {
-	$class = new foundri\lib\api\urls();
-	if ( ! $endpoint ) {
-		return $class->root_url();
-	}elseif( 'asks' == $endpoint ) {
-		return $class->ask_query();
-	}
+/**
+ * Get URL for Foundri API endpoint
+ *
+ * @since 0.0.1
+ *
+ * @param string $endpoint Name of endpoint
+ * @param null| array $args Optionally an array of query args to add.
+ *
+ * @return string
+ */
+function foundri_api_url( $endpoint, $args = null  ) {
+	$urls = new \foundri\lib\api\urls();
+	$url = $urls->root_url( $endpoint, $args );
+	return $url;
 }
 
 /**

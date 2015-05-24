@@ -68,6 +68,51 @@
 			);
 		}
 
+		$( document ).on( 'click', '.ask-preview', function(e) {
+			e.preventDefault;
+			id = $( this ).attr( 'data-ask-id' );
+			foundri_get_ask_details( id );
+		});
+
+		$( document ).on( 'click', '#ask-close', function(e) {
+			e.preventDefault;
+			$( '.ask-single' ).remove();
+			$( foundri_ask_results_el ).html( foundri_ask_results_store );
+			$( foundri_back_button_el ).hide();
+			$( foundri_search_button ).show();
+		});
+
+
+		var foundri_ask_results_store;
+		var foundri_ask_results_el = document.getElementById( 'ask-results' );
+		var foundri_back_button_el =  document.getElementById( 'ask-close' );
+		var foundri_search_button = document.getElementById( 'search_2' );
+
+		function foundri_get_ask_details( id ) {
+			data = {
+				ask: id
+			};
+
+			$.get(
+				"<?php echo esc_url( foundri_api_url( 'ask' ) ); ?>",
+				data,
+				function( response ) {
+					source = $( '#foundri-ask-single' ).html();
+					template = Handlebars.compile( source );
+					html = template( response );
+					foundri_ask_results_store = $( foundri_ask_results_el ).html();
+					foundri_ask_results_el.innerHTML = html;
+					$( foundri_back_button_el ).show();
+					$( foundri_search_button ).hide();
+
+
+
+				}
+			);
+		}
+
+
+
 
 
 	</script>

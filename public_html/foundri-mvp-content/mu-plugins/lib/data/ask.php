@@ -50,7 +50,8 @@ class ask extends get_item {
 			'email',
 			'twitter',
 			'facebook',
-		)
+		),
+		'id' => array()
 
 	);
 }
