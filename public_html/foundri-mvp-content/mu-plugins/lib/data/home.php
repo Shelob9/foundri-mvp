@@ -62,7 +62,6 @@ class home {
 		$data[ 'login_form' ] = output::login_or_register();
 		$data[ 'profile_form' ] = output::bio_profile();
 
-
 		$this->display_data = $data;
 
 	}

@@ -76,6 +76,12 @@ class community extends get_item {
 			$fields[ 'join_button'] = '<span style="display:none;" id="is-already-member"></span>';
 		}
 
+		$fields[ 'home_button' ] = foundri_link_markup( 'home',
+			__( 'Foundri Home', 'foundri' ),
+			__( 'Back to Foundri Home', 'foundri' ),
+			true
+		);
+
 		return $fields;
 	}
 

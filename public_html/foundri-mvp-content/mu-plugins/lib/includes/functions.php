@@ -96,17 +96,26 @@ function foundri_link( $id_or_slug ) {
  *
  * @param int|string $id_or_slug ID, or for ask permalink slug for the link, or use "home" to link to home.
  * @param string $text Link text
- * @param null|string $title Optional, the ttile attribute for link
+ * @param null|string $title Optional. The title attribute for link
+ * @param bool $button Optional. Whether link is a button or not. Default is false.
  *
  * @return string
  */
-function foundri_link_markup( $id_or_slug, $text, $title = null ) {
+function foundri_link_markup( $id_or_slug, $text, $title = null, $button = false ) {
 	if ( ! $title  ) {
 		$title = sprintf( __( 'Link to ', 'foundri' ) );
 	}
 	$link = foundri_link( $id_or_slug );
 
-	return sprintf( '<a href="%1s" class="foundri-link" data-foundri-internal="true" title="%2s">%3s</a>', $link, $title, $text );
+	$class = 'foundri-link';
+	if ( $button ) {
+		$class .= ' btn btn-default';
+	}
+
+	$type = 'a';
+
+
+	return sprintf( '<a href="%2s" class="%3s" data-foundri-internal="true" title="%4s">%5s</a>', $link, $class, $title, $text );
 }
 
 
