@@ -27,22 +27,21 @@ class ask extends vars {
 	 */
 	public function get_items( $request ) {
 		$params = $request->get_params();
-		$text_search = pods_v( 'search', $params );
-		if ( $text_search ) {
-			$text_search = urldecode( $text_search );
-		}
 
-		$type = pods_v( 'ask_type', $params );
-		if ( ! in_array( $type, array_keys( foundri_ask_types() ) ) ) {
+
+		if ( ! in_array( $params[ 'ask_type' ], array_keys( foundri_ask_types() ) ) ) {
 			$response = new \WP_REST_Response( '', 404, array() );
 		}else{
 			$id = pods_v( 'community', $params );
 
 			$class_params = array(
-				'ask_type'     => $type,
-				'search_param' => $text_search,
+				'ask_type'     => $params[ 'ask_type' ],
 				'page'         => $params[ 'page' ]
 			);
+
+			if ( $params[ 'text' ] ) {
+				$class_params[ 'search_param' ] = $params[ 'text' ];
+			}
 
 			$query = new ask_query( $id, false, $class_params );
 			if ( 0 < $query->pods->total() ) {

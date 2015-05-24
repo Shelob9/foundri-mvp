@@ -41,6 +41,7 @@ $form = array (
 					'ID' => 'ask_type',
 					'type' => 'dropdown',
 					'label' => 'Type',
+					'required' => 1,
 					'slug' => 'ask_type',
 					'caption' => '',
 					'config' =>
