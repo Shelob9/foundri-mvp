@@ -41,7 +41,32 @@
 
 
 	<script>
+		/**
+		 * Set up vars
+		 */
+		//store html for ask results when in detail view
+		var foundri_ask_results_store;
 
+		//element for ask results #ask-results
+		var foundri_ask_results_el = document.getElementById( 'ask-results' );
+
+		//back button element #ask-close
+		var foundri_back_button_el =  document.getElementById( 'ask-close' );
+
+		//serch button element #search_2
+		var foundri_search_button = document.getElementById( 'search_2' );
+
+		//current user ID
+		var foundri_user_id = <?php echo (int) get_current_user_id(); ?>;
+
+		//URL for deleting asks
+		var foundri_delete_ask_endpoint_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'ask' ) ) ); ?>";
+
+		//URL for communities
+		var foundri_community_api_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'community' ) ) ); ?>";
+		/**
+		 * Search for asks by type
+		 */
 		function foundri_ask_search( obj ) {
 
 			data = {
@@ -72,6 +97,9 @@
 			);
 		}
 
+		/**
+		 * Delete asks on click of delete button
+		 */
 		$( document ).on( 'click', '.delete-ask', function(e) {
 			e.preventDefault();
 			id = $( this ).attr( 'data-ask-id' );
@@ -92,7 +120,7 @@
 		});
 
 		/**
-		 * Join Community
+		 * Join Community on click of join button.
 		 */
 		$( document ).on( 'click', '#join-community', function(e) {
 			e.preventDefault;
@@ -111,13 +139,18 @@
 		});
 
 
-
+		/**
+		 * View ask details on click of ask preview
+		 */
 		$( document ).on( 'click', '.ask-preview', function(e) {
 			e.preventDefault;
 			id = $( this ).attr( 'data-ask-id' );
 			foundri_get_ask_details( id );
 		});
 
+		/**
+		 * Close ask on click of close button
+		 */
 		$( document ).on( 'click', '#ask-close', function(e) {
 			e.preventDefault;
 			$( '.ask-single' ).remove();
@@ -127,13 +160,7 @@
 		});
 
 
-		var foundri_ask_results_store;
-		var foundri_ask_results_el = document.getElementById( 'ask-results' );
-		var foundri_back_button_el =  document.getElementById( 'ask-close' );
-		var foundri_search_button = document.getElementById( 'search_2' );
-		var foundri_user_id = <?php echo (int) get_current_user_id(); ?>;
-		var foundri_delete_ask_endpoint_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'ask' ) ) ); ?>";
-		var foundri_community_api_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'community' ) ) ); ?>";
+
 
 		function foundri_get_ask_details( id ) {
 			data = {
