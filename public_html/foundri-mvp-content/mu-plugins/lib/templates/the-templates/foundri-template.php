@@ -175,7 +175,8 @@
 		function foundri_get_ask_details( id ) {
 			data = {
 				ask: id,
-				foundriApiNonce: foundri_nonce
+				foundriApiNonce: foundri_nonce,
+				uid: foundri_user_id
 			};
 
 			$.get(

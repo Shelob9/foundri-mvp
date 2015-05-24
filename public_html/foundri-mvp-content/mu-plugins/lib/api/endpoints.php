@@ -92,8 +92,7 @@ class endpoints extends vars {
 							'sanitize_callback' => 'absint',
 						),
 						$this->nonce_field => array(
-							'default' => 0,
-							'sanitize_callback' => 'strip_tags',
+							'default' => 0
 						),
 						'uid'  => array(
 							'default' => 0,
@@ -254,8 +253,19 @@ class endpoints extends vars {
 		 *
 		 * Must get replaced once we have oAuth
 		 */
+		$ref = wp_get_referer();
+		$ref = parse_url( $ref );
+		$foundri = parse_url( home_url() );
+		if ( $ref[ 'host'] != $foundri[ 'host'] ) {
+			return false;
+		}
+
 		$this->uid = $params[ 'uid' ];
 		add_filter( 'nonce_user_logged_out', function(){
+			if ( 0 == $this->uid ) {
+				return 100000000000;
+			}
+
 			return $this->uid;
 		});
 
