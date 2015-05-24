@@ -64,7 +64,14 @@ class endpoints extends vars {
 						'page'  => array(
 							'default' => 1,
 							'sanitize_callback' => 'absint',
-						)
+						),
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
 				),
@@ -84,6 +91,14 @@ class endpoints extends vars {
 							'default' => 0,
 							'sanitize_callback' => 'absint',
 						),
+						$this->nonce_field => array(
+							'default' => 0,
+							'sanitize_callback' => 'strip_tags',
+						),
+						'uid'  => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
 
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
@@ -98,7 +113,16 @@ class endpoints extends vars {
 				array(
 					'methods'         => \WP_REST_Server::DELETABLE,
 					'callback'        => array( $this->ask_cb_class, 'delete_item' ),
-					'permission_callback' => array( $this, 'permissions_check' )
+					'permission_callback' => array( $this, 'permissions_check' ),
+					'args'            => array(
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+					)
 				),
 			)
 		);
@@ -114,6 +138,13 @@ class endpoints extends vars {
 					'callback'        => array( $this, 'not_implemented' ),
 					'args'            => array(
 						'id' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
 							'default' => 0,
 							'sanitize_callback' => 'absint',
 						),
@@ -136,6 +167,13 @@ class endpoints extends vars {
 							'default' => 0,
 							'sanitize_callback' => 'absint',
 						),
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
 
 					),
 					'permission_callback' => array( $this, 'permissions_check' )
@@ -150,7 +188,16 @@ class endpoints extends vars {
 				array(
 					'methods'         => \WP_REST_Server::DELETABLE,
 					'callback'        => array( $this, 'not_implemented' ),
-					'permission_callback' => array( $this, 'permissions_check' )
+					'permission_callback' => array( $this, 'permissions_check' ),
+					'args'            => array(
+						$this->nonce_field => array(
+							'default' => 0,
+						)
+					),
+					'uid'  => array(
+						'default' => 0,
+						'sanitize_callback' => 'absint',
+					),
 				),
 			)
 		);
@@ -164,6 +211,13 @@ class endpoints extends vars {
 					'callback'        => array( $this->community_cb_class, 'join' ),
 					'args'            => array(
 						'id' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
 							'default' => 0,
 							'sanitize_callback' => 'absint',
 						),
@@ -185,10 +239,23 @@ class endpoints extends vars {
 	 *
 	 * @since 0.0.1
 	 *
+	 * @param \WP_REST_Request $request Full details about the request
+	 *
 	 * @return bool
 	 */
-	public function permissions_check() {
-		return true;
+	public function permissions_check( $request ) {
+		$params = $request->get_params();
+
+		$nonce = $params[ $this->nonce_field ];
+
+		$this->uid = $params[ 'uid' ];
+		add_filter( 'nonce_user_logged_out', function(){
+			return $this->uid;
+		});
+
+		$verified = wp_verify_nonce( $nonce, $this->nonce_action );
+
+		return $verified;
 	}
 
 	/**

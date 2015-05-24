@@ -30,7 +30,7 @@ function foundri_view() {
  * @return string
  */
 function foundri_api_url( $endpoint, $args = null  ) {
-	$urls = new \foundri\lib\api\urls();
+	$urls = foundri_api_urls_instance();
 	$url = $urls->root_url( $endpoint, $args );
 	return $url;
 }
@@ -139,4 +139,41 @@ function foundri_is_member( $id ) {
 	if ( in_array( get_current_user_id(), $members ) ) {
 		return true;
 	}
+}
+
+/**
+ * Get an instance of the API URLs class.
+ *
+ * Use as a shortcut to get to URLs, and the public vars of that class.
+ *
+ * @return \foundri\lib\api\urls
+ */
+function foundri_api_urls_instance() {
+	global $foundri_api_urls_instance;
+	if ( ! is_object( $foundri_api_urls_instance ) ){
+		$foundri_api_urls_instance = new \foundri\lib\api\urls();
+	}
+
+	return $foundri_api_urls_instance;
+}
+
+/**
+ * Create a nonce for the API
+ *
+ * @since 0.0.1
+ *
+ * @return string
+ */
+function foundri_api_nonce() {
+	$class = foundri_api_urls_instance();
+
+	$nonce = wp_create_nonce( $class->nonce_action );
+
+	return $nonce;
+}
+
+function foundri_nonce_field() {
+	$class = foundri_api_urls_instance();
+
+	return $class->nonce_field;
 }

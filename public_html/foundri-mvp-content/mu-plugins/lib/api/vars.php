@@ -36,4 +36,33 @@ class vars {
 	 */
 	protected $version = 'v1';
 
+	/**
+	 * Field to use for nonces
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var string
+	 */
+	public $nonce_field = 'foundriApiNonce';
+
+	/**
+	 * Prefix for nonce actions
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var string
+	 */
+	public $nonce_action_prefix = '_foundri_api_';
+
+	/**
+	 * The nonce action
+	 *
+	 * @since 0.0.1
+	 *
+	 * @var string
+	 */
+	public $nonce_action = '_foundri_api_';
+
+
+
 }

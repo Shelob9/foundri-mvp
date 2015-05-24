@@ -64,6 +64,11 @@
 
 		//URL for communities
 		var foundri_community_api_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'community' ) ) ); ?>";
+
+		//nonce
+		var foundri_nonce = "<?php echo foundri_api_nonce(); ?>";
+
+		var foundri_nonce_field = "<?php echo foundri_nonce_field(); ?>";
 		/**
 		 * Search for asks by type
 		 */
@@ -72,7 +77,9 @@
 			data = {
 				ask_type: obj.data.type_search,
 				text: encodeURIComponent( obj.data.text_search ),
-				community:<?php echo $post->ID; ?>
+				community:<?php echo $post->ID; ?>,
+				foundriApiNonce: foundri_nonce,
+				uid: foundri_user_id
 			};
 
 			$.get(
@@ -106,7 +113,7 @@
 			parent = $( this ).parent().parent();
 
 			$.ajax( {
-				url: foundri_delete_ask_endpoint_url + id,
+				url: foundri_delete_ask_endpoint_url + id + '?foundriApiNonce=' + foundri_nonce + '&uid=' + foundri_user_id,
 				type: 'DELETE',
 				success: function() {
 					el = 'ask-' + id;
@@ -125,13 +132,16 @@
 		$( document ).on( 'click', '#join-community', function(e) {
 			e.preventDefault;
 			id = $( this ).attr( 'data-community' );
-			console.log( id );
+
 			url = foundri_community_api_url + id + '/join';
-			console.log( url );
+
 			$.ajax( {
 					url: url,
 					method: 'POST',
-					data: {},
+					data: {
+						foundriApiNonce: foundri_nonce,
+						uid: foundri_user_id
+					},
 					success: function() {
 						$( this ).remove();
 					}
@@ -164,7 +174,8 @@
 
 		function foundri_get_ask_details( id ) {
 			data = {
-				ask: id
+				ask: id,
+				foundriApiNonce: foundri_nonce
 			};
 
 			$.get(
