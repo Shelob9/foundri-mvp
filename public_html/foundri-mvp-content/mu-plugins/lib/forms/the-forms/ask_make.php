@@ -15,7 +15,7 @@ $form = array (
 	'description' => '',
 	'db_support' => 1,
 	'pinned' => 0,
-	'check_honey' => 1,
+	'check_honey' => null,
 	'success' => 'Form has been successfully submitted. Thank you.',
 	'avatar_field' => '',
 	'form_ajax' => 1,
@@ -27,12 +27,13 @@ $form = array (
 			'fields' =>
 				array (
 					'ask_type' => '1:1',
-					'ask_details' => '1:2',
-					'community_id' => '2:1',
-					'user_id' => '2:1',
-					'save' => '2:2',
+					'name' => '1:2',
+					'ask_details'  => '2:1',
+					'community_id' => '3:1',
+					'user_id' => '3:1',
+					'save' => '3:2',
 				),
-			'structure' => '4:8|6:6',
+			'structure' => '4:8|12|6:6',
 		),
 	'fields' =>
 		array (
@@ -78,11 +79,11 @@ $form = array (
 						'type' => '',
 					),
 			),
-			'ask_details' => array (
-				'ID' => 'ask_details',
+			'name' => array (
+				'ID' => 'name',
 				'type' => 'text',
 				'label' => 'I Want To',
-				'slug' => 'ask_details',
+				'slug' => 'name',
 				'required' => 1,
 				'caption' => '',
 				'config' =>
@@ -96,7 +97,27 @@ $form = array (
 				'conditions' =>
 					array (
 						'type' => '',
+								),
+			),
+			'ask_details' => array (
+				'ID' => 'ask_details',
+				'type' => 'paragraph',
+				'label' => 'Ask Details',
+				'slug' => 'ask_details',
+				'caption' => '',
+				'config' =>
+					array (
+						'custom_class' => '',
+						'visibility' => 'all',
+						'placeholder' => '',
+						'rows' => 4,
+						'default' => '',
 					),
+				'conditions' =>
+					array (
+						'type' => '',
+					),
+
 			),
 			'save' => array (
 				'ID' => 'save',
@@ -167,7 +188,7 @@ $form = array (
 				),
 			'values' =>
 				array (
-					0 => '{user:user_login}  %ask_type% %ask_details%',
+					0 => '{user:user_login}  %ask_type% %name%',
 					1 => '{embed_post:ID}',
 					2 => get_current_user_id(),
 				),

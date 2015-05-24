@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract class for other save classes to extend.
+ * Prepare data to be saved, sanaitizing and removing unneeded fields from request.
  *
  * @package   foundri
  * @author    Josh Pollock <Josh@JoshPress.net>
@@ -13,7 +13,13 @@
 namespace foundri\lib\data\save;
 
 
-abstract class saver implements save_interface {
+class prepare_data {
+	/**
+	 * The prepared and sanitized data to save.
+	 *
+	 * @var array
+	 */
+	public $data;
 
 	/**
 	 * Prepare data to be saved, sanaitizing and removing unneeded fields from request.
@@ -24,32 +30,18 @@ abstract class saver implements save_interface {
 	 *
 	 * @param array $_data Data from request.
 	 *
-	 * @return array
 	 */
-	protected static function prepare_data( $_data ) {
+	public function  __construct( $_data, $allowed_fields ) {
 		$data = array();
-		foreach( self::save_fields() as $field ) {
+
+		foreach( $allowed_fields as $field ) {
 			$data[ $field ] = pods_v_sanitized( $field, $_data );
 		}
 
-		return $data;
+		if ( ! empty( $data ) ) {
+			$this->data = $data;
+		}
 	}
 
-	/**
-	 * Fields to include in the saving
-	 *
-	 * Make sure to set in the extending class.
-	 *
-	 * @since 0.0.1
-	 *
-	 * @access protected
-	 *
-	 * @return array
-	 */
-	protected static function save_fields() {
-		return array(
-
-		);
-	}
 	
 }

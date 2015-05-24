@@ -11,7 +11,7 @@
 namespace foundri\lib\data\save;
 
 
-class bio_profile extends saver implements save_interface {
+class bio_profile implements save_interface {
 	/**
 	 * Do the actual save
 	 *
@@ -24,6 +24,7 @@ class bio_profile extends saver implements save_interface {
 	public static function make_save( $data ) {
 		$user_id = get_current_user_id();
 		if ( 0 < (int) $user_id ) {
+			$data = new prepare_data( $data, self::save_fields() );
 			foreach( $data as $field => $datum ) {
 				update_user_meta( $user_id, $field, $datum );
 			}
@@ -42,7 +43,7 @@ class bio_profile extends saver implements save_interface {
 	 *
 	 * @return array
 	 */
-	protected static function save_fields() {
+	public static function save_fields() {
 		return array(
 			'first_name',
 			'last_name',

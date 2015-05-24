@@ -26,4 +26,6 @@ interface save_interface {
 	 */
 	public static function make_save( $data );
 
+	public static function save_fields();
+
 }

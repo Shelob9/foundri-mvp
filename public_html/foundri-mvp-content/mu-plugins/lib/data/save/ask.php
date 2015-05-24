@@ -12,7 +12,7 @@
 namespace foundri\lib\data\save;
 
 
-class ask extends saver implements save_interface {
+class ask implements save_interface {
 
 	/**
 	 * Do the actual save
@@ -27,11 +27,17 @@ class ask extends saver implements save_interface {
 	 */
 	public static function make_save( $data ) {
 		$pods = pods( FOUNDRI_ASK, null );
-		$data = self::prepare_data( $data );
-		$data[ 'author' ] = get_current_user_id();
-		$id = $pods->save( $data );
+		$data = new prepare_data( $data, self::save_fields() );
+		$data = $data->data;
 
-		return $id;
+		if ( is_array( $data ) ) {
+			$data['author'] = get_current_user_id();
+			$id             = $pods->save( $data );
+
+			return $id;
+		}else{
+			return false;
+		}
 
 	}
 
@@ -44,11 +50,12 @@ class ask extends saver implements save_interface {
 	 *
 	 * @return array
 	 */
-	protected static function save_fields() {
+	public static function save_fields() {
 		return array(
 			'ask_type',
 			'community',
-			'ask_details'
+			'ask_details',
+			'name'
 		);
 	}
 
