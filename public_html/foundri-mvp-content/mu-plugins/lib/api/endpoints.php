@@ -244,10 +244,16 @@ class endpoints extends vars {
 	 * @return bool
 	 */
 	public function permissions_check( $request ) {
+
 		$params = $request->get_params();
 
 		$nonce = $params[ $this->nonce_field ];
 
+		/**
+		 * This is a hack to make shit work for now.
+		 *
+		 * Must get replaced once we have oAuth
+		 */
 		$this->uid = $params[ 'uid' ];
 		add_filter( 'nonce_user_logged_out', function(){
 			return $this->uid;
