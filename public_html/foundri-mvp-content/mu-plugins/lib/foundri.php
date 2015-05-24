@@ -15,7 +15,7 @@ use foundri\lib\api\endpoints;
 use foundri\lib\api\view_api;
 use foundri\lib\forms\load\form_load;
 use foundri\lib\forms\process\process_forms;
-use foundri\lib\views\view_loader;
+use foundri\lib\templates\loader;
 
 class foundri {
 	public function __construct() {
@@ -38,7 +38,7 @@ class foundri {
 	 */
 	public function template( $template ) {
 		if ( ! $this->is_view_api() ) {
-			$template = FOUNDDRI_VIEW_DIR . 'foundri-template.php';
+			$template = FOUNDRI_TEMPLATE_DIR . 'foundri-template.php';
 		}
 
 		return $template;
@@ -83,7 +83,7 @@ class foundri {
 	}
 
 	protected function is_view_api() {
-		return view_loader::is_view_api();
+		return loader::is_view_api();
 
 	}
 

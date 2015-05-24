@@ -8,12 +8,12 @@
  * @link
  * @copyright 2015 Foundri
  */
-namespace foundri\lib\views;
+namespace foundri\lib\templates;
 
 
 use foundri\lib\api\view_api;
 
-class view_loader {
+class loader {
 
 	/**
 	 * Allowed views
@@ -109,7 +109,7 @@ class view_loader {
 			return new \WP_Error( 'bad-view' );
 		}
 
-		$template = FOUNDDRI_VIEW_DIR . $template;
+		$template = FOUNDRI_TEMPLATE_DIR . $template;
 
 		if ( file_exists( $template ) ) {
 			$output = caldera_metaplate_from_file( $template, null, $data );

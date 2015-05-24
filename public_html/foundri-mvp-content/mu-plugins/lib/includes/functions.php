@@ -15,7 +15,7 @@
  * @return null|string
  */
 function foundri_view() {
-	return \foundri\lib\views\view_loader::get_view();
+	return \foundri\lib\templates\loader::get_view();
 
 }
 
@@ -45,7 +45,7 @@ function foundri_print_handelbars_js_templates() {
 		'foundri-community-single' => 'community-single',
 		'home' => 'home'
 	) as $id => $template ) {
-		$template = FOUNDDRI_VIEW_DIR . $template . '.html';
+		$template = FOUNDRI_TEMPLATE_DIR . $template . '.html';
 		$template = file_get_contents( $template );
 		printf( '<script id="%1s" type="text/x-handlebars-template">%2s</script>', $id, $template );
 	}
