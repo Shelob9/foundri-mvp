@@ -91,6 +91,27 @@
 
 		});
 
+		/**
+		 * Join Community
+		 */
+		$( document ).on( 'click', '#join-community', function(e) {
+			e.preventDefault;
+			id = $( this ).attr( 'data-community' );
+			console.log( id );
+			url = foundri_community_api_url + id + '/join';
+			console.log( url );
+			$.ajax( {
+					url: url,
+					method: 'POST',
+					data: {},
+					success: function() {
+						$( this ).remove();
+					}
+				} );
+		});
+
+
+
 		$( document ).on( 'click', '.ask-preview', function(e) {
 			e.preventDefault;
 			id = $( this ).attr( 'data-ask-id' );
@@ -112,6 +133,7 @@
 		var foundri_search_button = document.getElementById( 'search_2' );
 		var foundri_user_id = <?php echo (int) get_current_user_id(); ?>;
 		var foundri_delete_ask_endpoint_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'ask' ) ) ); ?>";
+		var foundri_community_api_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'community' ) ) ); ?>";
 
 		function foundri_get_ask_details( id ) {
 			data = {

@@ -109,3 +109,34 @@ function foundri_link_markup( $id_or_slug, $text, $title = null ) {
 	return sprintf( '<a href="%1s" class="foundri-link" data-foundri-internal="true" title="%2s">%3s</a>', $link, $title, $text );
 }
 
+
+/**
+ * Get markup for a join community button
+ *
+ * @since 0.0.1
+ *
+ * @param int $id Community ID
+ *
+ * @return string
+ */
+function foundri_join_community_link_markup( $id ) {
+
+	return sprintf( '<a href="#" class="join btn btn-success" data-community="%d" id="join-community">%s</a>', $id, __( 'Join', 'foundri' ) );
+}
+
+/**
+ * Check if current user is a member of a community.
+ *
+ * @since 0.0.1
+ *
+ * @param int $id Community ID
+ *
+ * @return bool
+ */
+function foundri_is_member( $id ) {
+	$community = new \foundri\lib\data\community( $id );
+	$members = $community->pods->field( 'members.ID' );
+	if ( in_array( get_current_user_id(), $members ) ) {
+		return true;
+	}
+}

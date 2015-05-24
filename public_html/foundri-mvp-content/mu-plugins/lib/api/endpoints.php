@@ -41,6 +41,10 @@ class endpoints extends vars {
 	public function register_routes() {
 		$root = $this->api_root;
 		$version = $this->version;
+
+		/**
+		 * Get Asks
+		 */
 		register_rest_route( "{$root}/{$version}", '/asks', array(
 				array(
 					'methods'         => \WP_REST_Server::READABLE,
@@ -68,6 +72,9 @@ class endpoints extends vars {
 			)
 		);
 
+		/**
+		 * Get a single Ask
+		 */
 		register_rest_route( "{$root}/{$version}", '/ask', array(
 				array(
 					'methods'         => \WP_REST_Server::READABLE,
@@ -84,10 +91,84 @@ class endpoints extends vars {
 			)
 		);
 
+		/**
+		 * Delete a single ask
+		 */
 		register_rest_route( "{$root}/{$version}", '/ask' . '/(?P<id>[\d]+)', array(
 				array(
 					'methods'         => \WP_REST_Server::DELETABLE,
 					'callback'        => array( $this->ask_cb_class, 'delete_item' ),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+		/**
+		 * Get communities
+		 *
+		 * @todo implement
+		 */
+		register_rest_route( "{$root}/{$version}", '/communities', array(
+				array(
+					'methods'         => \WP_REST_Server::READABLE,
+					'callback'        => array( $this, 'not_implemented' ),
+					'args'            => array(
+						'id' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+
+					),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+		/**
+		 * Get a single community
+		 */
+		register_rest_route( "{$root}/{$version}", '/community', array(
+				array(
+					'methods'         => \WP_REST_Server::READABLE,
+					'callback'        => array( $this, 'not_implemented' ),
+					'args'            => array(
+						'id' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+
+					),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+		/**
+		 * Delete a single community
+		 */
+		register_rest_route( "{$root}/{$version}", '/community' . '/(?P<id>[\d]+)', array(
+				array(
+					'methods'         => \WP_REST_Server::DELETABLE,
+					'callback'        => array( $this, 'not_implemented' ),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+		/**
+		 * Join a community
+		 */
+		register_rest_route( "{$root}/{$version}", '/community' . '/(?P<id>[\d]+)/join', array(
+				array(
+					'methods'         => \WP_REST_Server::EDITABLE,
+					'callback'        => array( $this->community_cb_class, 'join' ),
+					'args'            => array(
+						'id' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+
+					),
 					'permission_callback' => array( $this, 'permissions_check' )
 				),
 			)
@@ -108,6 +189,23 @@ class endpoints extends vars {
 	 */
 	public function permissions_check() {
 		return true;
+	}
+
+	/**
+	 * Helper for unimplemented endpoints.
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param \WP_REST_Request $request Full details about the request
+	 *
+	 * @return \WP_HTTP_Response
+	 */
+	public function not_implemented( $request ) {
+
+		$response = new \WP_REST_Response( __( 'API Endpoint not yet implemented.', 'foundri' ), 501, array() );
+		$response->set_matched_route(  $request->get_route() );
+
+		return $response;
 	}
 
 }
