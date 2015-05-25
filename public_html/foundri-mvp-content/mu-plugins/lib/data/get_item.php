@@ -209,11 +209,15 @@ abstract class get_item {
 					$user_meta = get_user_meta( $user_id );
 
 					foreach ( $sub_fields as $sub_field ) {
-						$_v = pods_v( $sub_field, $user_meta );
-						if ( is_array( $_v ) && isset( $_v[0] ) ) {
-							$_v = $_v[0];
+						if ( 'avatar' == $sub_field ) {
+							$_v = get_avatar($user_id );
 						}else{
-							$_v = '';
+							$_v = pods_v( $sub_field, $user_meta );
+							if ( is_array( $_v ) && isset( $_v[0] ) ) {
+								$_v = $_v[0];
+							} else {
+								$_v = '';
+							}
 						}
 						$data[ $field ][ $sub_field ] = $_v;
 
