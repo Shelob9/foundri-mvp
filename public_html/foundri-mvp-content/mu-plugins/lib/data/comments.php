@@ -135,9 +135,27 @@ class comments {
 					}
 
 					if ( 'comment_author' == $field ) {
-						$user = get_user_by( 'id', $comment[ 'user_id' ] );
+						$_data[ 'author_avatar' ] = '';
+						$_data[ 'author_name' ] = '';
+						if ( 0 < absint( $comment[ 'comment_author' ] ) ){
+							$user = get_user_by( 'id', $comment[ 'comment_author' ] );
+						}elseif( 0 < absint( $comment[ 'user_id' ]) ){
+							$user = get_user_by( 'id', $comment[ 'user_id' ] );
+						}elseif(  $comment[ 'comment_author_email' ] ){
+							$_data[ 'author_avatar' ] = get_avatar( $comment[ 'comment_author_email' ] );
+							if ($comment[ 'comment_author' ] && 0 > absint( $comment[ 'comment_author' ] ) ){
+								$_data[ 'author_name' ] =  $comment[ 'comment_author' ];
+							}
+							continue;
+
+						}
+						else{
+							continue;
+						}
+
 						$_data[ 'author_avatar' ] = get_avatar( $user->user_email );
 						$_data[ 'author_name' ] = sprintf( '%s %s', $user->user_firstname, $user->user_lastname );
+
 						continue;
 					}
 
