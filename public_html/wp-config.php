@@ -14,6 +14,7 @@ define( 'WP_WEBROOT_DIR',  WP_ROOT_DIR . '/public_html' );
  */
 $local_config = WP_ROOT_DIR . '/dev-config.php';
 $prod_config = WP_ROOT_DIR . '/production-config.php';
+$staging_config = WP_ROOT_DIR . '/staging-config.php';
 
 /**
  * Load production-config.php if possible. If not, use local-config.
@@ -24,11 +25,17 @@ if ( ! file_exists( $prod_config ) ) {
 	$prod_config = WP_ROOT_DIR . '/production-config.php';
 }
 
+//load staging-config?
+if( file_exists( $staging_config ) ){
+    define( 'WP_LOCAL_DEV', false );
+    include( $staging_config );
+}
 //attempt to load production-config
-if ( file_exists( $prod_config ) ) {
+elseif ( file_exists( $prod_config ) ) {
 	define( 'WP_LOCAL_DEV', false );
 	include( $prod_config );
 }
+//OK, local config then
 elseif ( file_exists( $local_config ) ) {
 	define( 'WP_LOCAL_DEV', true );
 	include( $local_config  );
