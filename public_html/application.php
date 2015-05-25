@@ -7,9 +7,18 @@
  * Content dir/url
  */
 define( 'CONTENT_DIR', '/foundri-mvp-content' );
-define( 'WP_CONTENT_DIR', WP_WEBROOT_DIR . CONTENT_DIR );
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/public_html' . CONTENT_DIR );
 
+if ( ! defined( 'WP_CONTENT_DIR' ) ) {
+  define( 'WP_CONTENT_DIR', WP_WEBROOT_DIR . CONTENT_DIR );  
+}
+
+
+if ( ! defined( 'WP_CONTENT_URL' ) ) {
+   define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/public_html' . CONTENT_DIR ); 
+}
+
+
+ 
 /**
  * DB info
  */
