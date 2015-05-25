@@ -48,18 +48,10 @@
     "johnpbloch/wordpress"                                      : "4.2.2",
     "pods-framework/pods"                                       : "2.x",
     "wpackagist-plugin/caldera-forms"                           : "*",
-    "wpackagist-plugin/log-viewer"                              : "*",
     "wpackagist-theme/twentyfifteen"                            : "*",
     "calderawp/cf-users"                                        : "*",
     "wp-api/wp-api"                                             : "*",
     "Desertsnowman/Caldera-Forms"                               : "1.2.x"
-  },
-  "require-dev" : {
-    "wpackagist-plugin/log-deprecated-notices"              : "*",
-    "wpackagist-plugin/debug-bar"                           : "*",
-    "wpackagist-plugin/debug-bar-console"                   : "*",
-    "wpackagist-plugin/user-switching"                      : "*",
-    "wpackagist-plugin/simply-show-ids"                     : "*"
   },
   "extra"       : {
     "wordpress-install-dir": "public_html/wp",
