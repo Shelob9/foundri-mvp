@@ -303,18 +303,20 @@ class endpoints extends vars {
 		$params = $request->get_params();
 
 		$nonce = $params[ $this->nonce_field ];
-
+/**
 		/**
 		 * This is a hack to make shit work for now.
 		 *
 		 * Must get replaced once we have oAuth
 		 */
+		/**
 		$ref = wp_get_referer();
 		$ref = parse_url( $ref );
 		$foundri = parse_url( home_url() );
 		if ( $ref[ 'host'] != $foundri[ 'host'] ) {
 			return false;
 		}
+		 */
 
 		$this->uid = $params[ 'uid' ];
 		add_filter( 'nonce_user_logged_out', function(){
