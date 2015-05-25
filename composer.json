@@ -21,19 +21,7 @@
     },
     {
       "type": "git",
-      "url" : "https://bitbucket.org/calderadev/cf-geo-autocomplete"
-    },
-    {
-      "type": "git",
-      "url" : "https://bitbucket.org/calderadev/caldera-easy-pods"
-    },
-    {
-      "type": "git",
       "url" : "https://bitbucket.org/calderadev/cf-users"
-    },
-    {
-      "type": "git",
-      "url" : "https://bitbucket.org/calderadev/caldera-custom-login"
     },
     {
       "type" : "git",
