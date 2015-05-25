@@ -127,6 +127,36 @@ class endpoints extends vars {
 		);
 
 		/**
+		 * Get comments by ask
+		 */
+		register_rest_route( "{$root}/{$version}", '/ask' . '/(?P<id>[\d]+)/comments', array(
+				array(
+					'methods'         => \WP_REST_Server::READABLE,
+					'callback'        => array( $this->ask_cb_class, 'get_comments' ),
+					'args'            => array(
+						'ask' => array(
+							'default' => null,
+							'sanitize_callback' => 'absint',
+						),
+						'community' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+
+					),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+		/**
 		 * Get communities
 		 *
 		 * @todo implement
@@ -210,6 +240,32 @@ class endpoints extends vars {
 					'callback'        => array( $this->community_cb_class, 'join' ),
 					'args'            => array(
 						'id' => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+						$this->nonce_field => array(
+							'default' => 0,
+						),
+						'uid'  => array(
+							'default' => 0,
+							'sanitize_callback' => 'absint',
+						),
+
+					),
+					'permission_callback' => array( $this, 'permissions_check' )
+				),
+			)
+		);
+
+		/**
+		 * Get comments by community
+		 */
+		register_rest_route( "{$root}/{$version}", '/community' . '/(?P<id>[\d]+)/comments', array(
+				array(
+					'methods'         => \WP_REST_Server::READABLE,
+					'callback'        => array( $this->community_cb_class, 'get_comments' ),
+					'args'            => array(
+						'community' => array(
 							'default' => 0,
 							'sanitize_callback' => 'absint',
 						),

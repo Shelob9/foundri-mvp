@@ -25,7 +25,8 @@ class form_load {
 		'login_or_register',
 		'bio_profile',
 		'ask_search',
-		'community_search'
+		'community_search',
+		'comment',
 	);
 
 	/**
@@ -53,6 +54,7 @@ class form_load {
 			$location = dirname( dirname( __FILE__ ) ) . '/the-forms/' . $name . '.php';
 			if ( file_exists( $location ) ) {
 				$form = include $location;
+				$form[ 'check_honey' ] = null;
 			}
 
 		}

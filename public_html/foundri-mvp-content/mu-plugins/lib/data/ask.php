@@ -12,6 +12,8 @@
 namespace foundri\lib\data;
 
 
+use foundri\lib\forms\load\output;
+
 class ask extends get_item {
 
 	/**
@@ -55,4 +57,6 @@ class ask extends get_item {
 		'id' => array()
 
 	);
+
+
 }

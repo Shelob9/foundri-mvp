@@ -132,9 +132,9 @@ abstract class get_item {
 	 *
 	 * @since 0.0.1
 	 *
-	 * @access private
+	 * @access protected
 	 */
-	private function set_pods_object() {
+	protected function set_pods_object() {
 
 		$this->pods = pods( $this->pod_name );
 
@@ -190,6 +190,9 @@ abstract class get_item {
 	 * @access protected
 	 *
 	 * @param bool $markup_fields Optional. Whether to add additional markup fields or not. Default is false, which does not add.
+	 * @param bool. $set_property Optional. If true, the default, the class property $display_data is set, if false, array of data is returned.
+	 *
+	 * @return array|void If ! $set_property then array if data is returned.
 	 */
 	protected function set_display_data( $markup_fields, $set_property = true ) {
 		$data = array(
@@ -255,6 +258,13 @@ abstract class get_item {
 
 	}
 
+	/**
+	 * Set display data by looping through object
+	 *
+	 * @since 0.0.1
+	 *
+	 * @access protected
+	 */
 	protected function set_display_data_with_loop() {
 		$data = array();
 		if ( 0 < $this->pods->total() ) {

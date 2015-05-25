@@ -29,7 +29,8 @@ class loader {
 		'community-single',
 		'community-preview',
 		'ask-single',
-		'ask-preview'
+		'ask-preview',
+		'comment-single',
 	);
 
 	/**

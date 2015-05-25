@@ -14,6 +14,7 @@ namespace foundri\lib\forms\process;
 
 use foundri\lib\data\save\ask;
 use foundri\lib\data\save\bio_profile;
+use foundri\lib\data\save\comment;
 
 class process_forms {
 	public function __construct() {
@@ -23,7 +24,8 @@ class process_forms {
 	public function route( $form ) {
 		if ( in_array( $form[ 'ID' ], array(
 			'ask_make',
-			'bio_profile'
+			'bio_profile',
+			'comment'
 		) ) ) {
 			$data= array();
 			foreach( $form[ 'fields' ] as $field_id => $field){
@@ -43,6 +45,9 @@ class process_forms {
 				case 'bio_profile' == $form_id :
 					$data[ 'profile_cf_entry_id' ] = \Caldera_Forms::get_field_data( '_entry_id', $form );
 					bio_profile::make_save( $data );
+					break;
+				case 'comment' == $form_id :
+					comment::make_save( $data );
 					break;
 				default :
 					break;

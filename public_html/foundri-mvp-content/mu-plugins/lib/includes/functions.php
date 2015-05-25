@@ -43,7 +43,8 @@ function foundri_print_handelbars_js_templates() {
 		'foundri-ask-single' => 'ask-single',
 		'foundri-ask-preview' => 'ask-preview',
 		'foundri-community-single' => 'community-single',
-		'home' => 'home'
+		'home' => 'home',
+		'foundri-comment-single' => 'comment-single'
 	) as $id => $template ) {
 		$template = FOUNDRI_TEMPLATE_DIR . $template . '.html';
 		$template = file_get_contents( $template );

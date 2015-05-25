@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js">
+<!DOCTDiscussion<html <?php language_attributes(); ?> class="no-js">
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width">
@@ -17,7 +16,6 @@
 			$post = new stdClass();
 			$post->ID = 0;
 		}
-
 		wp_head();
 	?>
 	</head>
@@ -65,10 +63,22 @@
 		//URL for communities
 		var foundri_community_api_url = "<?php echo esc_url( trailingslashit( foundri_api_url( 'community' ) ) ); ?>";
 
+		//id of containter for asks comments
+
+		var foundri_ask_comment_id = 'ask-comments';
+
+		//element for ask comments #ask-comments
+		var foundri_ask_comment_el = document.getElementById( foundri_ask_comment_id );
+
 		//nonce
 		var foundri_nonce = "<?php echo foundri_api_nonce(); ?>";
 
-		var foundri_nonce_field = "<?php echo foundri_nonce_field(); ?>";
+		//header for comment form #discussion-headline
+		var foundri_comment_headline = document.getElementById( 'discussion-headline' );
+
+		//element for general discussion #community-comments-general
+		var foundri_community_comments_el = document.getElementById( 'community-comments-general' );
+
 		/**
 		 * Search for asks by type
 		 */
@@ -156,6 +166,7 @@
 			e.preventDefault;
 			id = $( this ).attr( 'data-ask-id' );
 			foundri_get_ask_details( id );
+			$( foundri_community_comments_el ).hide();
 		});
 
 		/**
@@ -167,11 +178,60 @@
 			$( foundri_ask_results_el ).html( foundri_ask_results_store );
 			$( foundri_back_button_el ).hide();
 			$( foundri_search_button ).show();
+			$( foundri_ask_comment_el ).empty();
+			$( '[name="ask_comment_id"]' ).val( 0 );
+			$( foundri_comment_headline ).html( 'Discuss This Community' );
+			$( foundri_community_comments_el ).show();
 		});
 
+		/**
+		 * Get comments for an ask
+		 */
+		function foundri_get_ask_comments( id ) {
+			data = {
+				ask: id,
+				foundriApiNonce: foundri_nonce,
+				uid: foundri_user_id,
+				community:<?php echo $post->ID; ?>
+			};
+
+			url = "<?php echo esc_url( foundri_api_url( 'ask' ) ); ?>" + '/' + id  + '/comments/';
+
+			$.get(
+				url,
+				data,
+				function( response ) {
+					if ( 'object' == typeof  response ) {
+
+						$.each( response, function( i, comment ) {
+							source = $( '#foundri-comment-single' ).html();
+							template = Handlebars.compile( source );
+							html = template( comment );
+							if ( null == foundri_ask_comment_el ) {
+								comment_div = '<div id="'+foundri_ask_comment_id +'"><h5>Discussion</h5></div>'
+								$( '#ask-single-bottom' ).append( comment_div );
+								foundri_ask_comment_el = document.getElementById( foundri_ask_comment_id );
+
+							}
+							$( foundri_ask_comment_el ).append( html  );
+
+						});
+
+					}else{
+						$( foundri_ask_comment_el ).html( "No Discussion Yet." );
+					}
+
+				}
+			);
 
 
+		}
 
+		/**
+		 * Get details for an ask
+		 *
+		 * @param id Ask ID
+		 */
 		function foundri_get_ask_details( id ) {
 			data = {
 				ask: id,
@@ -191,11 +251,59 @@
 					$( foundri_back_button_el ).show();
 					$( foundri_search_button ).hide();
 
+					//set comment ID in ask form
+					$( '[name="ask_comment_id"]' ).val( id );
+					//get comments
+					foundri_get_ask_comments( id );
+					$( foundri_comment_headline ).html( 'Discuss ' + response.name );
+
 
 
 				}
 			);
 		}
+
+		/**
+		 * Runs after a comment is saved.
+		 *
+		 * @param obj
+		 */
+		function foundri_after_comment( obj ){
+			console.log( obj );
+		}
+
+
+		/**
+		 * Get communitiy general comments
+		 */
+		function foundri_get_community_comments() {
+			url = "<?php echo trailingslashit(esc_url( foundri_api_url( 'community' ) ) ) . $post->ID .'/comments/'; ?>"
+			$.get(
+				url,
+				{
+					foundriApiNonce: foundri_nonce,
+					uid: foundri_user_id,
+					community: <?php echo $post->ID; ?>
+				}, function( response ) {
+					if ( 'object' == typeof  response ) {
+
+						$.each( response, function( i, comment ) {
+							source = $( '#foundri-comment-single' ).html();
+							template = Handlebars.compile( source );
+							html = template( comment );
+							$( foundri_community_comments_el ).append( html  );
+
+						});
+
+					}else{
+						$( foundri_community_comments_el ).html( "No Discussion Yet." );
+					}
+
+
+				}
+			)
+		}
+		foundri_get_community_comments();
 
 
 

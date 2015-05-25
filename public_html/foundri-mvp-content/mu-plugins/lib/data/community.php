@@ -82,7 +82,10 @@ class community extends get_item {
 			true
 		);
 
+		$fields[ 'comment_form' ] = $fields[ 'forms' ][ 'comment_form' ] = output::comment();
+
 		return $fields;
+
 	}
 
 

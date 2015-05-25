@@ -13,6 +13,7 @@ namespace foundri\lib\api\callbacks;
 
 use foundri\lib\api\vars;
 use foundri\lib\data\ask_query;
+use foundri\lib\data\comments;
 
 class ask extends vars {
 
@@ -106,6 +107,38 @@ class ask extends vars {
 				$response = new \WP_REST_Response( $params[ 'id' ], 200, array() );
 			}
 
+		}
+
+		$response->set_matched_route(  $request->get_route() );
+
+		return $response;
+
+	}
+
+	/**
+	 * Get comments for this ask
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param \WP_REST_Request $request Full details about the request
+	 *
+	 * @return \WP_HTTP_Response
+	 */
+	public function get_comments( $request ) {
+		$params = $request->get_params();
+		if (  0 != $params[ 'community'] ) {
+
+
+			$query = new comments( $params[ 'community' ], $params[ 'ask' ] );
+
+			if ( ! empty( $query->display_data ) ) {
+				$response = new \WP_REST_Response( $query->display_data, 200, array() );
+			} else {
+				$response = new \WP_REST_Response( '', 204, array() );
+			}
+
+		}else{
+			$response = new \WP_REST_Response( '', 404, array() );
 		}
 
 		$response->set_matched_route(  $request->get_route() );
