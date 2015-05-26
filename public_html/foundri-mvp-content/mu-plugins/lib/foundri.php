@@ -119,9 +119,17 @@ class foundri {
 		pods_redirect( foundri_link( 'home' ) );
 	}
 
+	/**
+	 * Do a logout on logout button click
+	 *
+	 * @since 0.0.1
+	 *
+	 * @uses "wp_ajax_foundri_logout" action
+	 */
 	public function logout_button() {
 		wp_logout();
 		status_header( 200 );
+		pods_redirect( foundri_link( 'home' ) );
 		die();
 	}
 
