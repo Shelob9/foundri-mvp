@@ -22,7 +22,7 @@ $staging_config = WP_ROOT_DIR . '/staging-config.php';
 
 //correct if production-config is above root
 if ( ! file_exists( $prod_config ) ) {
-	$prod_config = WP_ROOT_DIR . '/production-config.php';
+	$prod_config = dirname( WP_ROOT_DIR ). '/production-config.php';
 }
 
 //load staging-config?
