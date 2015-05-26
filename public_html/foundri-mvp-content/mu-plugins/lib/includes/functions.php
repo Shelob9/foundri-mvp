@@ -79,9 +79,11 @@ function foundri_ask_types() {
 function foundri_link( $id_or_slug ) {
 	if ( 0 < (int) $id_or_slug ) {
 		$link = get_permalink( $id_or_slug );
+	}elseif( $id_or_slug = 'home' ) {
+		$link = home_url();
 	}elseif( is_string( $id_or_slug ) ){
 		$link = home_url( $id_or_slug );
-	}elseif( $id_or_slug = 'home' ) {
+	}else{
 		$link = home_url();
 	}
 
