@@ -42,10 +42,10 @@
     "Desertsnowman/Caldera-Forms"                               : "1.2.x"
   },
   "extra"       : {
-    "wordpress-install-dir": "public_html/wp",
+    "wordpress-install-dir": "wp",
     "installer-paths": {
-      "public_html/foundri-mvp-content/plugins/{$name}/" : ["type:wordpress-plugin"],
-      "public_html/foundri-mvp-content/themes/{$name}/"  : ["type:wordpress-theme"]
+      "foundri-mvp-content/plugins/{$name}/" : ["type:wordpress-plugin"],
+      "foundri-mvp-content/themes/{$name}/"  : ["type:wordpress-theme"]
     }
   }
 }

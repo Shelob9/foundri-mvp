@@ -1,2 +1,3 @@
 <?php
-include( dirname( __FILE__ ) ).'/public_html/index.php';
+define( 'WP_USE_THEMES', true );
+require( dirname( __FILE__ ) . '/wp/wp-blog-header.php' );

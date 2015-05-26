@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         shell: {
             composer: {
                 command:
-                    'cd public_html/foundri-mvp-content/plugins; pwd; ls; cd cf-users; pwd; composer update; cd ../; cd ../; cd mu-plugins; cd lib; pwd; composer update;'
+                    'cd foundri-mvp-content/plugins; pwd; ls; cd cf-users; pwd; composer update; cd ../; cd ../; cd mu-plugins; cd lib; pwd; composer update;'
             }
         }
     } );

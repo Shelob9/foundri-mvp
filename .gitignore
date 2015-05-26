@@ -1,7 +1,7 @@
-public_html/foundri-mvp-content/plugins
-public_html/foundri-mvp-content/themes
-public_html/foundri-mvp-content/themes
-public_html/wp
+foundri-mvp-content/plugins
+foundri-mvp-content/themes
+foundri-mvp-content/uploads
+wp
 vendor/
 node_modules/
 production-config.php
@@ -9,6 +9,5 @@ _production-config.php
 staging-config.php
 _staging-config.php
 debug.log
-public_html/foundri-mvp-content/debug.log
+foundri-mvp-content/debug.log
 .idea/
-public_html/foundri-mvp-content/uploads

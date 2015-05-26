@@ -6,8 +6,8 @@
 /**
  * Set up constants for the basic paths
  */
-define( 'WP_ROOT_DIR',  dirname( dirname( __FILE__ ) ) );
-define( 'WP_WEBROOT_DIR',  WP_ROOT_DIR . '/public_html' );
+define( 'WP_ROOT_DIR',  dirname( __FILE__ )  );
+define( 'WP_WEBROOT_DIR',  WP_ROOT_DIR  );
 
 /**
  * Define locations for configs
@@ -20,7 +20,7 @@ $staging_config = WP_ROOT_DIR . '/staging-config.php';
  * Load production-config.php if possible. If not, use local-config.
  */
 
-//correct if production-config is in root, not above root
+//correct if production-config is above root
 if ( ! file_exists( $prod_config ) ) {
 	$prod_config = WP_ROOT_DIR . '/production-config.php';
 }

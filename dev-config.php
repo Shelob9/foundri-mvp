@@ -38,5 +38,5 @@ define( "PODS_GITHUB_UPDATE", true );
  * URLS
  */
 define( 'WP_HOME', 'http://foundri-mvp.dev/' );
-define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/public_html/wp' );
+define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp' );
 
