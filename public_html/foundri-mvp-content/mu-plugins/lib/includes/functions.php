@@ -70,6 +70,8 @@ function foundri_ask_types() {
 /**
  * Get link to a Foundri item.
  *
+ * IMPORTANT: Link is not escaped here, as it could be used later, be sure to late escape.
+ *
  * @since 0.0.1
  *
  * @param int|string $id_or_slug ID, or for ask permalink slug for the link, or use "home" to link to home.
