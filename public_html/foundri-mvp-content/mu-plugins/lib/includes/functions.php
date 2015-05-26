@@ -117,10 +117,11 @@ function foundri_link_markup( $id_or_slug, $text, $title = null, $button = false
 		$class .= ' btn btn-default';
 	}
 
-	$type = 'a';
-
-
-	return sprintf( '<a href="%2s" class="%3s" data-foundri-internal="true" title="%4s">%5s</a>', $link, $class, $title, $text );
+	return sprintf( '<a href="%2s" class="%3s" data-foundri-internal="true" title="%4s">%5s</a>',
+		esc_url( $link ),
+		esc_attr( $class ),
+		esc_attr( $title ),
+		esc_html( $text ) );
 }
 
 
