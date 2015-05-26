@@ -25,6 +25,7 @@ class foundri {
 		add_action( 'template_redirect', array( $this, 'view_api' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'assets' ), 666 );
 		add_action( 'wp_logout', array( $this, 'logout' ) );
+		add_action( 'wp_ajax_foundri_logout', array( $this, 'logout_button' ) );
 
 	}
 
@@ -116,6 +117,12 @@ class foundri {
 	 */
 	public function logout() {
 		pods_redirect( foundri_link( 'home' ) );
+	}
+
+	public function logout_button() {
+		wp_logout();
+		status_header( 200 );
+		die();
 	}
 
 

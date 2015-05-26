@@ -1,6 +1,13 @@
 <div class="navbar navbar-default">
     <div class="container">
-        <span class="navbar-brand" href="#"><h1><img src="{{{foundri_logo}}}" />{{{home_link}}}</h1></span>
+        <span class="navbar-brand" href="#">
+            <h1><img src="{{{foundri_logo}}}" />{{{home_link}}}</h1>
+        </span>
+        {{#is is_user_logged_in}}
+
+        {{else}}
+            <a class="btn btn-default" href="#" id="foundri-logout">Logout</a>
+        {{/is}}
     </div>
 </div>
 

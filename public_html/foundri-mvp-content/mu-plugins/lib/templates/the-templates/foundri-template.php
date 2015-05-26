@@ -315,6 +315,21 @@
 		}
 		foundri_get_community_comments();
 
+		/**
+		 * Logout button click event
+		 */
+		$( document ).on( 'click', '#foundri-logout', function(e) {
+			e.preventDefault();
+			$.get(
+				"<?php echo esc_url( admin_url( 'admin-ajax.php' ) );  ?>",
+				{
+					action: "foundri_logout"
+				},function(){
+					window.location.replace( "<?php echo esc_url( foundri_link( 'home' ) ); ?>" );
+				}
+			);
+		});
+
 
 	</script>
 		<?php

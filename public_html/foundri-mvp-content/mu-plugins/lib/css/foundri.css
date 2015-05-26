@@ -146,3 +146,7 @@
     display: inherit;
     width: 100%;
 }
+
+a#logout {
+    float: right;
+}
