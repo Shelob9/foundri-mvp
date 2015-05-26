@@ -330,6 +330,18 @@
 			);
 		});
 
+		/**
+		 * Refresh page after registering
+		 *
+		 * @param obj
+		 */
+		function foundri_post_register( obj ) {
+			if ( 'object' == typeof obj  && 'complete' == obj.status ) {
+				window.location.replace( "<?php echo esc_url( foundri_link( 'home' ) ); ?>" );
+			}
+
+		}
+
 
 	</script>
 		<?php

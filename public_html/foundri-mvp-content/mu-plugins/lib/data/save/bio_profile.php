@@ -25,7 +25,8 @@ class bio_profile implements save_interface {
 		$user_id = get_current_user_id();
 		if ( 0 < (int) $user_id ) {
 			$data = new prepare_data( $data, self::save_fields() );
-			foreach( $data as $field => $datum ) {
+
+			foreach( $data->data as $field => $datum ) {
 				update_user_meta( $user_id, $field, $datum );
 			}
 		}

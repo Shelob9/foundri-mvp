@@ -49,7 +49,7 @@ $form = array (
 							'custom_class' => '',
 							'visibility' => 'all',
 							'placeholder' => '',
-							'default' => '',
+							'default' => '{user:first_name}',
 							'mask' => '',
 						),
 					'conditions' =>
@@ -69,7 +69,7 @@ $form = array (
 							'custom_class' => '',
 							'visibility' => 'all',
 							'placeholder' => '',
-							'default' => '',
+							'default' => '{user:last_name}',
 							'mask' => '',
 						),
 					'conditions' =>
@@ -90,7 +90,7 @@ $form = array (
 							'visibility' => 'all',
 							'placeholder' => '',
 							'rows' => 4,
-							'default' => '',
+							'default' => '{user:bio}',
 						),
 					'conditions' =>
 						array (
@@ -128,7 +128,7 @@ $form = array (
 							'custom_class' => '',
 							'visibility' => 'all',
 							'placeholder' => '',
-							'default' => '',
+							'default' => '{user:user_email}',
 						),
 					'conditions' =>
 						array (
@@ -147,7 +147,7 @@ $form = array (
 							'custom_class' => '',
 							'visibility' => 'all',
 							'placeholder' => '',
-							'default' => '',
+							'default' => '{user:twitter}',
 							'mask' => '',
 						),
 					'conditions' =>
@@ -167,7 +167,7 @@ $form = array (
 							'custom_class' => '',
 							'visibility' => 'all',
 							'placeholder' => '',
-							'default' => '',
+							'default' => '{user:facebook}',
 							'mask' => '',
 						),
 					'conditions' =>

@@ -52,8 +52,10 @@ class output extends form{
 		$entry_id = null;
 		if ( 'bio_profile' == $name ) {
 			$_entry_id = get_user_meta( get_current_user_id(), 'profile_cf_entry_id', true );
-			if ( 0 < absint( $_entry_id ) ) {
+			if ( 1==3 && 0 < absint( $_entry_id ) ) {
 				$entry_id = (int) $_entry_id;
+
+			}else{
 
 			}
 

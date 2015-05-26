@@ -97,5 +97,14 @@ class community extends get_item {
 
 	}
 
+	/**
+	 * Add a user to a community
+	 *
+	 * @param int $user_id
+	 */
+	public function join( $user_id ) {
+		$this->pods->add_to( 'members', $user_id );
+	}
+
 
 }

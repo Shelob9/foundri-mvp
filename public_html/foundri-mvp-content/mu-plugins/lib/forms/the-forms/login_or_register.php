@@ -20,7 +20,7 @@ $form = array (
 		'success' => '',
 		'avatar_field' => '',
 		'form_ajax' => 1,
-		'custom_callback' => '',
+		'custom_callback' => 'foundri_post_register',
 		'form_visibility' => 'all',
 		'layout_grid' =>
 			array (
@@ -35,6 +35,7 @@ $form = array (
 						'login' => '6:2',
 						'register' => '6:2',
 						'remember' => '5:1',
+						'invite_code' => '5:1'
 					),
 				'structure' => '12|12|6:6|12|12|8:4',
 			),
@@ -329,6 +330,39 @@ $form = array (
 									),
 							),
 					),
+				'invite_code' =>
+					array (
+						'ID' => 'invite_code',
+						'type' => 'text',
+						'label' => 'Invite Code',
+						'slug' => 'invite_code',
+						'required' => 1,
+						'caption' => '',
+						'config' =>
+							array (
+								'custom_class' => '',
+								'visibility' => 'all',
+								'placeholder' => '',
+								'default' => '',
+								'mask' => '',
+							),
+						'conditions' =>
+							array (
+								'type' => 'show',
+								'group' =>
+									array (
+										'first_name_conditional' =>
+											array (
+												'1' =>
+													array (
+														'field' => 'login_or_register',
+														'compare' => 'is',
+														'value' => 'register',
+													),
+											),
+									),
+							),
+					),
 			),
 		'page_names' =>
 			array (
@@ -336,6 +370,31 @@ $form = array (
 			),
 		'processors' =>
 			array (
+				'foundri_invite' =>
+					array (
+						'ID' => 'foundri_invite',
+						'type' => 'foundri_invite',
+						'config' =>
+							array (
+
+							),
+						'conditions' =>
+							array (
+								'type' => 'show',
+								'group' =>
+									array (
+										'invite_conditional' =>
+											array (
+												'1' =>
+													array (
+														'field' => 'login_or_register',
+														'compare' => 'is',
+														'value' => 'register',
+													),
+											),
+									),
+							),
+					),
 				'user_login' =>
 					array (
 						'ID' => 'user_login',
