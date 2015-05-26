@@ -107,8 +107,9 @@
 						template = Handlebars.compile( source );
 						html = '<div id="search-result" class="col-sm-6 col-md-3">' + template( ask );
 						if ( foundri_user_id == ask.author.ID ) {
-							html += '<div><a href="#" data-ask-id="' + ask.ID + '" class="delete-ask btn btn-default" >Delete</a></div>';
+							html += '<div><a href="#ask-results" data-ask-id="' + ask.ID + '" class="ask-preview-btn delete-ask btn btn-default" >Delete</a></div>';
 						}
+						html += '<div><a href="#ask-results" data-ask-id="' + ask.ID + '" class="ask-preview-btn view-ask btn btn-default" >View</a></div>';
 						html += '</div>';
 						$( asks_el ).append( html );
 					});
@@ -165,7 +166,7 @@
 		/**
 		 * View ask details on click of ask preview
 		 */
-		$( document ).on( 'click', '.ask-preview', function(e) {
+		$( document ).on( 'click', '.ask-preview, .view-ask', function(e) {
 			e.preventDefault;
 			$( '#community-comments-header' ).hide();
 			id = $( this ).attr( 'data-ask-id' );

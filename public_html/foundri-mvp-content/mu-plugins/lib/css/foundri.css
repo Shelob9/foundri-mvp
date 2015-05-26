@@ -141,3 +141,8 @@
     position: relative;
     color: #2F4F4F;
 }
+
+.ask-preview-btn {
+    display: inherit;
+    width: 100%;
+}
