@@ -1,45 +1,59 @@
-<div class="container"  id="foundri-home">
-    <div class="row">
-        <h1>Foundri: Home</h1>
+<div class="navbar navbar-default">
+    <div class="container">
+        <span class="navbar-brand" href="#"><h1><img src="{{{foundri_logo}}}" />{{{home_link}}}</h1></span>
     </div>
+</div>
 
-    <div class="row">
+<div class="container"  id="foundri-home">
 
-         <div id="public-communities" class="col-sm-12 col-md-6">
-             <h3>Public Communities</h3>
-             <ul class="community-list">
-             {{#each public_communities}}
-             <li class="container community community-preview community-{{post_name}}" id="community-{{ID}}">
-                 {{{link_markup}}
-             </li>
-             {{/each}}
-         </ul>
-         </div>
+
 
         {{#is is_user_logged_in}}
-            <div id="users-communites" class="col-sm-12 col-md-6">
+
+        {{else}}
+         <div id="public-communities" class="col-sm-12 col-md-6">
+                <h3>Foundri is a global network and skills-sharing platform for entrepreneurs.</h3>
+                <h4>Foundri is currently serving these startup communities:</h4>
+             <ul class="community-list">
+                 {{#each public_communities}}
+                 <li class="container community community-preview community-{{post_name}}" id="community-{{ID}}">
+                     {{{link_markup}}
+                 </li>
+                 {{/each}}
+             </ul>
+         </div>
+        {{/is}}
+    <div class="row">
+        {{#is is_user_logged_in}}
+            <div id="users-communites" class="col-sm-12 col-md-3">
                 <h3>My Communities</h3>
                 <ul class="community-list">
                     {{#each users_communities}}
-                        <li class="container community community-preview community-{{post_name}}" id="community-{{ID}}">
-                            {{{link_markup}}
+                        <li class="container text-center community community-preview community-{{post_name}}" id="community-{{ID}}">
+                            {{{link_markup}}}
                         </li>
                     {{/each}}
                 </ul>
+                <p class="text-center alert-success"><span class="glyphicon glyphicon-ok"></span> Thank you for using Foundri. Use this panel to navigate to your community's page.</p>
             </div>
+            <div id="profile-form" class="col-sm-12 col-md-7">
+                <h3>Edit Profile</h3>
+                {{{profile_form}}}
+            </div>
+        <div id="feedback" class="col-sm-12 col-md-2">
+            <p class="text-center alert-warning"><span class="glyphicon glyphicon-check"></span> You're part of something awesome right now - thanks for using Foundri. If there's anything we can do better, <a href="">please let us know here.</a> We're listening.</p>
+        </div>
         {{else}}
             <div id="login-or-register" class="col-sm-12 col-md-6">
+                <h2>Sign Up</h2>
+                <h4>Connect. Learn. Grow. Succeed.</h4>
                 {{{login_form}}}
             </div>
         {{/is}}
     </div>
-    {{#is is_user_logged_in}}
-    <div class="row">
-        <div id="profile-form" class="col-sm-12 col-md-12">
-            <h3>Edit Profile</h3>
-            {{{profile_form}}}
-        </div>
-    </div>
-    {{/is}}
 
+</div>
+
+<div class="row" id="footer">
+    <p>Foundri &copy; 2015</p>
 </div>

@@ -1,16 +1,24 @@
-<div class="container ask ask-single ask-{{id}}" id="ask-{{id}}">
+<div class="container ask ask-single ask-{{id}}" id="ask-single-{{id}}">
+    <div class="row">
+        <a href="#ask-results" class="btn btn-warning" id="ask-close" >x</a>
+    </div>
+    <hr/>
     <div class="row" id="ask-single-top">
-        <div id="ask-who" class="col-sm-6">
-            {{author.first_name}} {{author.last_name}}
+        <div id="ask-who" class="col-sm-6 col-md-3">
+            {{{author.avatar}}}
         </div>
-        <div id="ask-title" class="col-sm-6">
-            {{{name}}}
+        <div class="col-sm-6 col-md-9">
+            <h3>{{author.first_name}} {{author.last_name}}</h3>
+            <h4>{{{name}}}</h4>
         </div>
     </div>
 
     <div class="row" id="ask-single-middle">
-        <div id="ask-detail" class="col-sm-12">
-            {{{ask_details}}}
+        <div class="col-sm-offset-0 col-md-3">
+
+        </div>
+        <div id="ask-detail" class="col-sm-12 col-md-9">
+            <h5>{{{ask_details}}}</h5>
         </div>
 
     </div>
@@ -33,6 +41,7 @@
                 </a>
             </li>
         </ul>
+        <hr/>
     </div>
 
 

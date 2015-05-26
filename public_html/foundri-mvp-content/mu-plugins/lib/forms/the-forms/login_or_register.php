@@ -26,17 +26,17 @@ $form = array (
 			array (
 				'fields' =>
 					array (
-						'email' => '1:1',
-						'login_or_register' => '1:2',
-						'first_name' => '2:1',
-						'last_name' => '2:2',
-						'password_register' => '3:1',
-						'password_login' => '3:1',
-						'login' => '3:2',
-						'register' => '3:2',
-						'remember' => '3:2',
+						'login_or_register' => '1:1',
+						'email' => '2:1',
+						'first_name' => '3:1',
+						'last_name' => '3:2',
+						'password_register' => '4:1',
+						'password_login' => '4:1',
+						'login' => '6:2',
+						'register' => '6:2',
+						'remember' => '5:1',
 					),
-				'structure' => '6:4|6:6|9:4',
+				'structure' => '12|12|6:6|12|12|8:4',
 			),
 		'fields' =>
 			array (

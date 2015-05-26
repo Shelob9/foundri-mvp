@@ -4,12 +4,12 @@
     id="ask-{{id}}"
     href="#ask-results"
 >
-    <div class="row" id="ask-single-top">
-        <div id="ask-who" class="col-sm-6">
-            {{author.first_name}} {{author.last_name}}
-        </div>
-        <div id="ask-title" class="col-sm-6">
-            {{{name}}}
+
+    <div class="container">
+        <div class="row" id="ask-single-top">
+            {{{author.avatar}}}
+            <h4 id="ask-who">{{author.first_name}} {{author.last_name}}</h4>
+            <h5 id="ask-title">{{{name}}}</h5>
         </div>
     </div>
 

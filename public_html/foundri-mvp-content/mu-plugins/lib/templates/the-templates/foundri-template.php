@@ -1,4 +1,4 @@
-<!DOCTDiscussion<html <?php language_attributes(); ?> class="no-js">
+<html <?php language_attributes(); ?> class="no-js">
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width">
@@ -79,6 +79,9 @@
 		//element for general discussion #community-comments-general
 		var foundri_community_comments_el = document.getElementById( 'community-comments-general' );
 
+		//element wrapping commment form itself #foundri-comment-form-wrap
+		var foundri_comment_form_wrap_el = document.getElementById( 'foundri-comment-form-wrap' );
+
 		/**
 		 * Search for asks by type
 		 */
@@ -102,7 +105,7 @@
 					$.each( response, function ( i, ask ) {
 						source = $( '#foundri-ask-preview' ).html();
 						template = Handlebars.compile( source );
-						html = '<div class="col-sm-6 col-md-3">' + template( ask );
+						html = '<div id="search-result" class="col-sm-6 col-md-3">' + template( ask );
 						if ( foundri_user_id == ask.author.ID ) {
 							html += '<div><a href="#" data-ask-id="' + ask.ID + '" class="delete-ask btn btn-default" >Delete</a></div>';
 						}
@@ -164,9 +167,11 @@
 		 */
 		$( document ).on( 'click', '.ask-preview', function(e) {
 			e.preventDefault;
+			$( '#community-comments-header' ).hide();
 			id = $( this ).attr( 'data-ask-id' );
 			foundri_get_ask_details( id );
 			$( foundri_community_comments_el ).hide();
+
 		});
 
 		/**
@@ -176,12 +181,13 @@
 			e.preventDefault;
 			$( '.ask-single' ).remove();
 			$( foundri_ask_results_el ).html( foundri_ask_results_store );
-			$( foundri_back_button_el ).hide();
 			$( foundri_search_button ).show();
 			$( foundri_ask_comment_el ).empty();
 			$( '[name="ask_comment_id"]' ).val( 0 );
 			$( foundri_comment_headline ).html( 'Discuss This Community' );
+			$( foundri_comment_form_wrap_el ).appendTo( '#community-discussion' );
 			$( foundri_community_comments_el ).show();
+			$( '#community-comments-header' ).show();
 		});
 
 		/**
@@ -201,18 +207,20 @@
 				url,
 				data,
 				function( response ) {
+					if ( null == foundri_ask_comment_el ) {
+						comment_div = '<div id="'+foundri_ask_comment_id +'"><h5>Discussion</h5></div>'
+						$( '#ask-single-bottom' ).append( comment_div );
+						foundri_ask_comment_el = document.getElementById( foundri_ask_comment_id );
+
+					}
+
 					if ( 'object' == typeof  response ) {
 
 						$.each( response, function( i, comment ) {
 							source = $( '#foundri-comment-single' ).html();
 							template = Handlebars.compile( source );
 							html = template( comment );
-							if ( null == foundri_ask_comment_el ) {
-								comment_div = '<div id="'+foundri_ask_comment_id +'"><h5>Discussion</h5></div>'
-								$( '#ask-single-bottom' ).append( comment_div );
-								foundri_ask_comment_el = document.getElementById( foundri_ask_comment_id );
 
-							}
 							$( foundri_ask_comment_el ).append( html  );
 
 						});
@@ -220,6 +228,8 @@
 					}else{
 						$( foundri_ask_comment_el ).html( "No Discussion Yet." );
 					}
+
+					$( foundri_comment_form_wrap_el ).appendTo( '#ask-single-bottom');
 
 				}
 			);
@@ -248,7 +258,6 @@
 					html = template( response );
 					foundri_ask_results_store = $( foundri_ask_results_el ).html();
 					foundri_ask_results_el.innerHTML = html;
-					$( foundri_back_button_el ).show();
 					$( foundri_search_button ).hide();
 
 					//set comment ID in ask form
@@ -304,9 +313,6 @@
 			)
 		}
 		foundri_get_community_comments();
-
-
-
 
 
 	</script>

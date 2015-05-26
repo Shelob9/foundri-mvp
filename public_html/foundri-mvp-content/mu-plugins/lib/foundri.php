@@ -23,7 +23,7 @@ class foundri {
 		add_action( 'init', array( $this, 'main_classes' ) );
 		add_action( 'rest_api_init', array( $this, 'boot_rest_api' ) );
 		add_action( 'template_redirect', array( $this, 'view_api' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'assets' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'assets' ), 666 );
 		add_action( 'wp_logout', array( $this, 'logout' ) );
 
 	}
@@ -102,8 +102,9 @@ class foundri {
 		}
 
 		$vendor_dir = trailingslashit( content_url() ) . 'mu-plugins/lib/vendor/';
-		wp_enqueue_script( 'caldera-modals', $vendor_dir . '/calderawp/caldera-modals/caldera-modals.js', array( 'jquery' ), $version );
-		wp_enqueue_style( 'caldera-modals', $vendor_dir . '/calderawp/caldera-modals/modals.css' );
+		//wp_enqueue_script( 'caldera-modals', $vendor_dir . '/calderawp/caldera-modals/caldera-modals.js', array( 'jquery' ), $version );
+		//wp_enqueue_style( 'caldera-modals', $vendor_dir . '/calderawp/caldera-modals/modals.css' );
+		wp_enqueue_style( 'foundri', trailingslashit( content_url() ) .'mu-plugins/lib/css/foundri.css' );
 	}
 
 	/**

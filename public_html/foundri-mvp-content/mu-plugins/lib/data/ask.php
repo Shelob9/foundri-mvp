@@ -52,7 +52,8 @@ class ask extends get_item {
 			'email',
 			'twitter',
 			'facebook',
-			'ID'
+			'ID',
+			'avatar'
 		),
 		'id' => array()
 

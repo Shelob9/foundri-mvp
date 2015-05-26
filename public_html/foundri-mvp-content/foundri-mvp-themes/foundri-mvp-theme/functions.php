@@ -48,6 +48,8 @@
 	 wp_enqueue_style( 'bootstrap', get_template_directory_uri() . "/node_modules/bootstrap/dist/css/bootstrap{$postfix}.css", array(), FOUNDRI_MVP_VERSION );
 
 	 wp_enqueue_script( 'bootstrap', get_template_directory_uri() . "/node_modules/bootstrap/dist/js/bootstrap{$postfix}.js", array(), FOUNDRI_MVP_VERSION, true );
+
+
  }
  add_action( 'wp_enqueue_scripts', 'foundri_theme_scripts_styles' );
  

@@ -1,0 +1,143 @@
+.navbar {
+    background-color: #ffebd6;
+    border-bottom: 1px solid #FF8000;
+    height: 110px;
+}
+#public-communities {
+    height: 566px;
+    background: #fefcea; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fefcea 0%, #f1da36 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefcea), color-stop(100%,#f1da36)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #fefcea 0%,#f1da36 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #fefcea 0%,#f1da36 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #fefcea 0%,#f1da36 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #fefcea 0%,#f1da36 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); /* IE6-9 */
+}
+#foundri-home {
+    margin-top: -19px;
+}
+#public-communities h3 {
+    margin: 40px 17px 20px 40px;
+}
+#public-communities h4 {
+    margin: 40px 17px 20px 40px;
+}
+#public-communities ul {
+    border: 1px solid #808080;
+    border-radius: 5px;
+    list-style: none;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #FFFFF0;
+}
+#public-communities li {
+    height: 40px;
+    padding: 10px;
+}
+#login-or-register {
+    margin-top: 18px;
+}
+#register_1{
+    width: 100%;
+}
+#login_1{
+    width: 100%;
+}
+#login-or-register form {
+    border: 1px solid ##FF8000;
+    padding: 15px;
+    border-radius: 5px;
+}
+#footer {
+    border-top: 1px solid #FF8000;
+    text-align: center;
+    background-color: #FFEBD6;
+}
+#community-24 {
+    width: 100%;
+    list-style: none;
+}
+#users-communites {
+    border-right: 1px solid #FF8000;
+    height: 100%;
+}
+#users-communites p {
+    border: 1px solid green;
+    padding: 5px;
+    position: relative;
+    top: 70%;
+    border-radius: 5px;
+}
+#feedback p {
+    border: 1px solid #b8860b;
+    margin-top: 10%;
+    padding: 5px;
+    border-radius: 5px;
+}
+#profile-form {
+    border-right: 1px solid #FF8000;
+    height: 100%;
+}
+#login_3 {
+    width: 100%;
+}
+#register_3 {
+    width: 100%;
+}
+#wait {
+    border: 1px solid #A94442;
+    padding: 10px;
+    border-radius: 5px;
+}
+#waitform {
+    height: 100%;
+}
+.community-single {
+    border-right: solid 1px #FF8000;
+    margin-top: -19px;
+    padding: 25px;
+}
+#search-result {
+    width: 24%;
+    margin: 1%;
+    padding-bottom: 5px;
+    border: 1px solid #ff8000;
+    border-radius: 5px;
+}
+#search-result:hover {
+    background-color: #ffebd6;
+    border-radius: 5px;
+}
+
+.ask-single {
+    width: 100%;
+    border: 1px dotted #FF8000;
+    border-radius: 5px;
+    padding: 30px;
+    background-color: #FFFFF6;
+}
+#ask-close {
+    position: relative;
+    top: 1px;
+    left: 95%;
+}
+#ask-single-bottom ul {
+    list-style: none;
+    font-size: 1.8em;
+    position: relative;
+    text-align: right;
+}
+#ask-single-bottom li {
+    display: inline;
+    padding: 0px 10px;
+}
+.navbar-brand img {
+    width: 75px;
+    position: relative;
+    bottom: 20px;
+}
+.foundri-link {
+    position: relative;
+    color: #2F4F4F;
+}

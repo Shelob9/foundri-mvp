@@ -65,7 +65,8 @@ class community extends get_item {
 		$fields = array(
 			'forms' => array(
 				'ask_make' => output::ask_make(),
-				'ask_search' => output::ask_search()
+				'ask_search' => output::ask_search(),
+				'login_form' => output::login_or_register()
 			),
 
 		);
@@ -81,6 +82,14 @@ class community extends get_item {
 			__( 'Back to Foundri Home', 'foundri' ),
 			true
 		);
+
+		$fields[ 'home_link' ] = foundri_link_markup( 'home',
+			__( 'Foundri', 'foundri' ),
+			__( 'Back to Foundri Home', 'foundri' ),
+			false
+		);
+
+		$fields[ 'foundri_logo' ] = trailingslashit( content_url() ) . '/mu-plugins/lib/templates/img/hammer-logo-trans.png';
 
 		$fields[ 'comment_form' ] = $fields[ 'forms' ][ 'comment_form' ] = output::comment();
 

@@ -61,6 +61,13 @@ class home {
 
 		$data[ 'login_form' ] = output::login_or_register();
 		$data[ 'profile_form' ] = output::bio_profile();
+		$data[ 'foundri_logo' ] = trailingslashit( content_url() ) . '/mu-plugins/lib/templates/img/hammer-logo-trans.png';
+
+		$data[ 'home_link' ] = foundri_link_markup( 'home',
+			__( 'Foundri', 'foundri' ),
+			__( 'Back to Foundri Home', 'foundri' ),
+			false
+		);
 
 		$this->display_data = $data;
 

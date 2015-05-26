@@ -1,4 +1,73 @@
-<div class="container community-single community-{{post_name}}" id="community-{{ID}}">
+<div class="navbar navbar-default">
+    <div class="container">
+        <span class="navbar-brand" href="#"><h1><img src="{{{foundri_logo}}}" />{{{home_link}}}</h1></span>
+    </div>
+</div>
+
+{{#is is_user_logged_in}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="container community-single community-{{post_name}}" id="community-{{ID}}">
+                <div class="row" id="community-single-top">
+                    <div class="community-details">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8">
+                                <h2>{{post_title}} Community</h2>
+                                {{{join_button}}}
+                                {{{home_button}}}
+                            </div>
+                            <div class="col-sm-12 col-md-4 community-logo">
+                                <img src="{{_image logo.ID medium}}" class="img-thumbnail"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 community-description">
+                                <br/>
+                                {{post_content}}
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <hr/>
+                            <h3>Create A Topic Within This Community</h3>
+                            {{{forms.ask_make}}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="community-single-middle">
+                    <div class="col-sm-12 community-want-search want-search">
+                        <hr/>
+                        <h3>Search This Community</h3>
+                        <div id="asks">
+                            {{{forms.ask_search}}}
+                            <div id="ask-results" class="row"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div class="row" id="community-discussion">
+                    <div class="col-sm-12" id="foundri-comment-form-wrap">
+                        <h3 id="discussion-headline">Discuss This Community</h3>
+                        {{{comment_form}}}
+                        <h5 id="community-comments-header">Comments</h5>
+                        <div id="community-comments-general"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="feedback" class="col-sm-12 col-md-2">
+            <p class="text-center alert-warning"><span class="glyphicon glyphicon-check"></span> You're part of something awesome right now - thanks for using Foundri. If there's anything we can do better, <a href="">please let us know here.</a> We're listening.</p>
+        </div>
+    </div>
+</div>
+
+
+<!--- <div class="container community-single community-{{post_name}}" id="community-{{ID}}">
     <div class="row" id="community-single-top">
         <div class="community-details col-sm-12 col-md-8">
             <div class="col-sm-12 col-md-8">
@@ -40,4 +109,27 @@
         </div>
 
     </div>
+</div>--->
+
+{{else}}
+
+<div class="container" id="waitform">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <p id="wait" class="alert-danger">Log in before viewing communities.</p>
+            {{{forms.login_form}}}
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+
+{{/is}}
+
+<div class="row" id="footer">
+    <p>Foundri &copy; 2015</p>
 </div>
