@@ -26,7 +26,7 @@ class foundri {
 		add_action( 'wp_enqueue_scripts', array( $this, 'assets' ), 666 );
 		add_action( 'wp_logout', array( $this, 'logout' ) );
 		add_action( 'wp_ajax_foundri_logout', array( $this, 'logout_button' ) );
-		add_action( 'init', array( $this, 'login_form_redirect' ) );
+		//add_action( 'init', array( $this, 'login_form_redirect' ) );
 		add_filter('show_admin_bar', '__return_false');
 	}
 
