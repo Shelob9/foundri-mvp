@@ -53,7 +53,7 @@ define( 'AUTOMATIC_UPDATER_DISABLED', true );
 define( 'DISALLOW_FILE_EDIT', true );
 
 //no uploading themes or plugins in admin
-define( 'DISALLOW_FILE_MODS', true);
+define( 'DISALLOW_FILE_MODS', false);
 
 //memory
 define( 'WP_MEMORY_LIMIT', '512M' );
