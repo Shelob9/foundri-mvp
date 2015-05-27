@@ -35,7 +35,6 @@
   "require"     : {
     "johnpbloch/wordpress"                                      : "4.2.2",
     "pods-framework/pods"                                       : "2.x",
-    "wpackagist-plugin/caldera-forms"                           : "*",
     "wpackagist-theme/twentyfifteen"                            : "*",
     "calderawp/cf-users"                                        : "*",
     "wp-api/wp-api"                                             : "*",
