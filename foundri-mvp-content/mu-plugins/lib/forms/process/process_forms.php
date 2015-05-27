@@ -192,8 +192,8 @@ class process_forms {
 	 */
 	protected function codes() {
 		return array(
-			'thinkfast' => 24,
-			'duhugurane' => 99,
+			'thinkfast' => 31,
+			'kamila' => 33,
 		);
 	}
 
