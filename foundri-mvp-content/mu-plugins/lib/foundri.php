@@ -26,7 +26,8 @@ class foundri {
 		add_action( 'wp_enqueue_scripts', array( $this, 'assets' ), 666 );
 		add_action( 'wp_logout', array( $this, 'logout' ) );
 		add_action( 'wp_ajax_foundri_logout', array( $this, 'logout_button' ) );
-
+		add_action( 'init', array( $this, 'login_form_redirect' ) );
+		add_filter('show_admin_bar', '__return_false');
 	}
 
 	/**
@@ -131,6 +132,19 @@ class foundri {
 		status_header( 200 );
 		pods_redirect( foundri_link( 'home' ) );
 		die();
+	}
+
+	/**
+	 * Redirect login page to home
+	 *
+	 * @since 0.0.1
+	 */
+	public function login_form_redirect() {
+		global $pagenow;
+		if( 'wp-login.php' == $pagenow ) {
+			wp_redirect( foundri_link( 'home' ) );
+			exit();
+		}
 	}
 
 
