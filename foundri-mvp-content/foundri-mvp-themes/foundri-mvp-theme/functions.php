@@ -51,7 +51,7 @@
 
 
  }
- add_action( 'wp_enqueue_scripts', 'foundri_theme_scripts_styles' );
+ //add_action( 'wp_enqueue_scripts', 'foundri_theme_scripts_styles' );
  
  /**
   * Add humans.txt to the <head> element.
