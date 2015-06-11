@@ -69,6 +69,12 @@ class home {
 			false
 		);
 
+		$data[ 'lost_password_link ' ] = sprintf(
+			'<a style="float:right;" class="btn btn-default" href="%1s">%2s</a>',
+			wp_lostpassword_url(),
+			__( 'Reset your password', 'foundri' )
+		);
+
 		$this->display_data = $data;
 
 	}
