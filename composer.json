@@ -38,7 +38,9 @@
     "wpackagist-theme/twentyfifteen"                            : "*",
     "calderawp/cf-users"                                        : "*",
     "wp-api/wp-api"                                             : "*",
-    "Desertsnowman/Caldera-Forms"                               : "1.2.x"
+    "Desertsnowman/Caldera-Forms"                               : "1.2.x",
+    "wpackagist-plugin/wpmandrill"                              : "*",
+    "wpackagist-plugin/postmatic"                               : "*"
   },
   "extra"       : {
     "wordpress-install-dir": "wp",
